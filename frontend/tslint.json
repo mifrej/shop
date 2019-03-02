@@ -1,0 +1,19 @@
+{
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:latest",
+    "tslint-react",
+    "tslint-config-airbnb",
+    "tslint-config-prettier"
+  ],
+  "jsRules": {},
+  "rules": {
+    "import-name": [false],
+    "jsx-boolean-value": [false],
+    "no-submodule-imports": [false],
+    "prettier": true,
+    "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore", "allow-pascal-case"]
+
+  },
+  "rulesDirectory": ["tslint-plugin-prettier"]
+}
