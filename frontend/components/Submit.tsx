@@ -51,20 +51,20 @@ function handleSubmit(event, client) {
         }
       }
     `,
-    variables: { title, url },
     update: (proxy, { data: { createPost } }) => {
       const data = proxy.readQuery({
         query: allPostsQuery,
         variables: allPostsQueryVars,
       });
       proxy.writeQuery({
-        query: allPostsQuery,
         data: {
           ...data,
           allPosts: [createPost, ...data.allPosts],
         },
+        query: allPostsQuery,
         variables: allPostsQueryVars,
       });
     },
+    variables: { title, url },
   });
 }

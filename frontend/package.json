@@ -1,9 +1,9 @@
 {
-  "name": "acm-shop-frontend-js",
+  "name": "shop-frontend",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/Akelius/acm-shop-service/tree/master/acm-shop-service-js",
-  "author": "ACM",
+  "repository": "https://github.com/mifrej/shop",
+  "author": "Milosz Frejnik",
   "license": "UNLICENCED",
   "private": true,
   "dependencies": {
@@ -21,6 +21,8 @@
     "build": "next build",
     "start": "next start",
     "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
     "tslint": "tslint -c tslint.json '{components,pages,lib}/**/*.{ts,tsx}'",
     "ts:check": "tsc --noEmit"
   },

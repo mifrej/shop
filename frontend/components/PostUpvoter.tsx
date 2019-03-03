@@ -45,17 +45,17 @@ function upvotePost(votes, id, client) {
         }
       }
     `,
-    variables: {
-      id,
-      votes: votes + 1,
-    },
     optimisticResponse: {
       __typename: 'Mutation',
       updatePost: {
-        __typename: 'Post',
         id,
+        __typename: 'Post',
         votes: votes + 1,
       },
+    },
+    variables: {
+      id,
+      votes: votes + 1,
     },
   });
 }

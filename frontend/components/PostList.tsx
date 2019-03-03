@@ -18,8 +18,8 @@ export const allPostsQuery = gql`
   }
 `;
 export const allPostsQueryVars = {
-  skip: 0,
   first: 10,
+  skip: 0,
 };
 
 export default function PostList() {
@@ -98,17 +98,18 @@ export default function PostList() {
 
 function loadMorePosts(allPosts, fetchMore) {
   fetchMore({
-    variables: {
-      skip: allPosts.length,
-    },
     updateQuery: (previousResult, { fetchMoreResult }) => {
       if (!fetchMoreResult) {
         return previousResult;
       }
-      return Object.assign({}, previousResult, {
+      return {
+        ...previousResult,
         // Append the new posts results to the old one
         allPosts: [...previousResult.allPosts, ...fetchMoreResult.allPosts],
-      });
+      };
+    },
+    variables: {
+      skip: allPosts.length,
     },
   });
 }

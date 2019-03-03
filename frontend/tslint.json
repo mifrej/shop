@@ -8,6 +8,7 @@
   ],
   "jsRules": {},
   "rules": {
+    "function-name": [false],
     "import-name": [false],
     "jsx-boolean-value": [false],
     "no-submodule-imports": [false],
