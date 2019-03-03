@@ -8,12 +8,27 @@
   ],
   "jsRules": {},
   "rules": {
+    "curly": [
+      true,
+      "ignore-same-line"
+    ],
     "function-name": [false],
+    "interface-name": [
+      true,
+      "never-prefix"
+    ],
     "import-name": [false],
     "jsx-boolean-value": [false],
+    "no-implicit-dependencies": false,
     "no-submodule-imports": [false],
-    "prettier": true,
-    "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore", "allow-pascal-case"]
+    "prettier": [true],
+    "variable-name": [
+      true,
+      "ban-keywords",
+      "check-format",
+      "allow-leading-underscore",
+      "allow-pascal-case"
+    ]
 
   },
   "rulesDirectory": ["tslint-plugin-prettier"]
