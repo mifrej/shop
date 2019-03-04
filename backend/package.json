@@ -6,13 +6,17 @@
   "license": "UNLICENCED",
   "private": true,
   "scripts": {
-    "start": "ts-node-dev --no-notify --respawn --transpileOnly ./src"
+    "start": "ts-node-dev --no-notify --respawn --transpileOnly ./src",
+    "tslint": "tslint -c tslint.json '{prisma,src}/**/*.ts'",
+    "ts:check": "tsc --noEmit"
   },
   "dependencies": {
+    "dotenv": "^6.2.0",
     "graphql": "14.1.1",
     "graphql-yoga": "1.17.4",
     "nexus": "0.10.0",
     "nexus-prisma": "0.3.3",
+    "prisma-binding": "^2.3.3",
     "prisma-client-lib": "1.27.1"
   },
   "devDependencies": {
@@ -20,7 +24,16 @@
     "@types/graphql": "14.0.7",
     "@types/node": "10.12.27",
     "@types/ws": "6.0.1",
+    "prettier": "^1.16.4",
     "ts-node-dev": "1.0.0-pre.32",
+    "tslint": "^5.13.1",
+    "tslint-config-airbnb-base": "^0.3.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-plugin-prettier": "^2.0.1",
     "typescript": "3.3.3333"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all"
   }
 }

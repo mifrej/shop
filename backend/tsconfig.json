@@ -1,14 +1,16 @@
 {
   "compilerOptions": {
-    "sourceMap": true,
-    "outDir": "dist",
+    "alwaysStrict": true,
+    "baseUrl": ".",
     "lib": ["esnext", "dom"],
-    // "strict": true, // `strict` is commented because of this issue: https://github.com/prisma/prisma/issues/3774; all its options except `strictNullChecks` & `strictPropertyInitialization` are explicitly set below.
     "noImplicitAny": true,
     "noImplicitThis": true,
-    "alwaysStrict": true,
+    "noUnusedParameters": true,
+    "outDir": "dist",
+    "skipLibCheck": true, // `skipLibCheck` is enabled until this is issue is fixed: https://github.com/prisma/nexus-prisma/issues/82
+    "sourceMap": true,
+    // "strict": true, // `strict` is commented because of this issue: https://github.com/prisma/prisma/issues/3774; all its options except `strictNullChecks` & `strictPropertyInitialization` are explicitly set below.
     "strictBindCallApply": true,
-    "strictFunctionTypes": true,
-    "skipLibCheck": true // `skipLibCheck` is enabled until this is issue is fixed: https://github.com/prisma/nexus-prisma/issues/82
+    "strictFunctionTypes": true
   }
 }
