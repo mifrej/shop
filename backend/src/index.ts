@@ -1,36 +1,36 @@
-import { GraphQLServer } from 'graphql-yoga'
-import { makePrismaSchema, prismaObjectType } from 'nexus-prisma'
-import * as path from 'path'
-import datamodelInfo from './generated/nexus-prisma'
-import { prisma } from './generated/prisma-client'
+import { GraphQLServer } from 'graphql-yoga';
+import { makePrismaSchema, prismaObjectType } from 'nexus-prisma';
+import * as path from 'path';
+import datamodelInfo from './generated/nexus-prisma';
+import { prisma } from './generated/prisma-client';
 
 const User = prismaObjectType({
   name: 'User',
   definition(t) {
-    t.prismaFields(['*'])
+    t.prismaFields(['*']);
   },
-})
+});
 
 const Post = prismaObjectType({
   name: 'Post',
   definition(t) {
-    t.prismaFields(['*'])
+    t.prismaFields(['*']);
   },
-})
+});
 
 const Query = prismaObjectType({
   name: 'Query',
   definition(t) {
-    t.prismaFields(['*'])
+    t.prismaFields(['*']);
   },
-})
+});
 
 const Mutation = prismaObjectType({
   name: 'Mutation',
   definition(t) {
-    t.prismaFields(['*'])
+    t.prismaFields(['*']);
   },
-})
+});
 
 const schema = makePrismaSchema({
   // Provide all the GraphQL types we've implemented
@@ -64,11 +64,11 @@ const schema = makePrismaSchema({
     ],
     contextType: 'types.Context',
   },
-})
+});
 
 const server = new GraphQLServer({
   schema,
   context: { prisma },
-})
+});
 
-server.start(() => console.log(`🚀 Server ready at http://localhost:4000`))
+server.start(() => console.log(`🚀 Server ready at http://localhost:4000`));

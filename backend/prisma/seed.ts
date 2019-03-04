@@ -1,4 +1,4 @@
-import { prisma } from '../src/generated/prisma-client'
+import { prisma } from '../src/generated/prisma-client';
 
 async function main() {
   await prisma.createUser({
@@ -11,7 +11,7 @@ async function main() {
         published: true,
       },
     },
-  })
+  });
   await prisma.createUser({
     email: 'bob@prisma.io',
     name: 'Bob',
@@ -28,7 +28,7 @@ async function main() {
         },
       ],
     },
-  })
+  });
 }
 
-main().catch(e => console.error(e))
+main().catch(e => console.error(e));
