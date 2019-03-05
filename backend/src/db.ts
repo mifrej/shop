@@ -3,10 +3,10 @@
 import { Prisma } from 'prisma-binding';
 
 const db = new Prisma({
-  typeDefs: 'generated/schema.graphql',
+  debug: false,
   endpoint: process.env.PRISMA_ENDPOINT,
   secret: process.env.PRISMA_SECRET,
-  debug: false,
+  typeDefs: 'generated/schema.graphql',
 });
 
 export default db;

@@ -38,8 +38,8 @@ const schema = makePrismaSchema({
 
   // Configure the interface to Prisma
   prisma: {
-    datamodelInfo,
     client: prisma,
+    datamodelInfo,
   },
 
   // Specify where Nexus should put the generated files
@@ -56,19 +56,19 @@ const schema = makePrismaSchema({
 
   // Configure automatic type resolution for the TS representations of the associated types
   typegenAutoConfig: {
+    contextType: 'types.Context',
     sources: [
       {
-        source: path.join(__dirname, './types.ts'),
         alias: 'types',
+        source: path.join(__dirname, './types.ts'),
       },
     ],
-    contextType: 'types.Context',
   },
 });
 
 const server = new GraphQLServer({
-  schema,
   context: { prisma },
+  schema,
 });
 
 server.start(() => console.log(`🚀 Server ready at http://localhost:4000`));

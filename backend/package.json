@@ -6,6 +6,7 @@
   "license": "UNLICENCED",
   "private": true,
   "scripts": {
+    "deploy": "prisma deploy",
     "start": "ts-node-dev --no-notify --respawn --transpileOnly ./src",
     "tslint": "tslint -c tslint.json '{prisma,src}/**/*.ts'",
     "ts:check": "tsc --noEmit"
@@ -16,6 +17,7 @@
     "graphql-yoga": "1.17.4",
     "nexus": "0.10.0",
     "nexus-prisma": "0.3.3",
+    "prisma": "^1.27.4",
     "prisma-binding": "^2.3.3",
     "prisma-client-lib": "1.27.1"
   },
