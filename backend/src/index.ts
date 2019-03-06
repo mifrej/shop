@@ -1,74 +1,15 @@
-import { GraphQLServer } from 'graphql-yoga';
-import { makePrismaSchema, prismaObjectType } from 'nexus-prisma';
-import * as path from 'path';
-import datamodelInfo from './generated/nexus-prisma';
-import { prisma } from './generated/prisma-client';
+import { prisma } from './generated/prisma-client'
 
-const User = prismaObjectType({
-  name: 'User',
-  definition(t) {
-    t.prismaFields(['*']);
-  },
-});
+// A `main` function so that we can use async/await
+async function main() {
 
-const Post = prismaObjectType({
-  name: 'Post',
-  definition(t) {
-    t.prismaFields(['*']);
-  },
-});
+  // Create a new user called `Alice`
+  const newUser = await prisma.createUser({ name: 'Alice' })
+  console.log(`Created new user: ${newUser.name} (ID: ${newUser.id})`)
 
-const Query = prismaObjectType({
-  name: 'Query',
-  definition(t) {
-    t.prismaFields(['*']);
-  },
-});
+  // Read all users from the database and print them to the console
+  const allUsers = await prisma.users()
+  console.log(allUsers)
+}
 
-const Mutation = prismaObjectType({
-  name: 'Mutation',
-  definition(t) {
-    t.prismaFields(['*']);
-  },
-});
-
-const schema = makePrismaSchema({
-  // Provide all the GraphQL types we've implemented
-  types: [Query, Mutation, User, Post],
-
-  // Configure the interface to Prisma
-  prisma: {
-    client: prisma,
-    datamodelInfo,
-  },
-
-  // Specify where Nexus should put the generated files
-  outputs: {
-    schema: path.join(__dirname, './generated/schema.graphql'),
-    typegen: path.join(__dirname, './generated/nexus.ts'),
-  },
-
-  // Configure nullability of input arguments: All arguments are non-nullable by default
-  nonNullDefaults: {
-    input: false,
-    output: false,
-  },
-
-  // Configure automatic type resolution for the TS representations of the associated types
-  typegenAutoConfig: {
-    contextType: 'types.Context',
-    sources: [
-      {
-        alias: 'types',
-        source: path.join(__dirname, './types.ts'),
-      },
-    ],
-  },
-});
-
-const server = new GraphQLServer({
-  context: { prisma },
-  schema,
-});
-
-server.start(() => console.log(`🚀 Server ready at http://localhost:4000`));
+main().catch(e => console.error(e))
