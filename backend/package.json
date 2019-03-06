@@ -5,6 +5,7 @@
   "name": "shop-backend-js",
   "scripts": {
     "deploy": "prisma deploy",
+    "dev": "ts-node-dev --no-notify --respawn --transpileOnly ./src",
     "start": "ts-node src/index.ts",
     "tslint": "tslint -c tslint.json '{prisma,src}/**/*.ts'",
     "ts:check": "tsc --noEmit"
@@ -12,6 +13,10 @@
   "repository": "https://github.com/mifrej/shop",
   "version": "1.0.0",
   "dependencies": {
+    "graphql": "^14.1.1",
+    "graphql-yoga": "^1.17.4",
+    "nexus": "^0.10.0",
+    "nexus-prisma": "^0.3.4",
     "prisma-client-lib": "^1.28.0"
   },
   "devDependencies": {
@@ -19,6 +24,7 @@
     "@types/node": "^11.10.4",
     "prettier": "^1.16.4",
     "ts-node": "^8.0.2",
+    "ts-node-dev": "^1.0.0-pre.32",
     "tslint": "^5.13.1",
     "tslint-config-airbnb-base": "^0.3.0",
     "tslint-config-prettier": "^1.18.0",
