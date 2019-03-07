@@ -20,11 +20,23 @@ export interface NexusPrismaTypes {
       PageInfo: PageInfoObject
       UserEdge: UserEdgeObject
       AggregateUser: AggregateUserObject
+      Item: ItemObject
+      ItemConnection: ItemConnectionObject
+      ItemEdge: ItemEdgeObject
+      AggregateItem: AggregateItemObject
+      CartItem: CartItemObject
+      CartItemConnection: CartItemConnectionObject
+      CartItemEdge: CartItemEdgeObject
+      AggregateCartItem: AggregateCartItemObject
       Mutation: MutationObject
       BatchPayload: BatchPayloadObject
       Subscription: SubscriptionObject
       UserSubscriptionPayload: UserSubscriptionPayloadObject
       UserPreviousValues: UserPreviousValuesObject
+      ItemSubscriptionPayload: ItemSubscriptionPayloadObject
+      ItemPreviousValues: ItemPreviousValuesObject
+      CartItemSubscriptionPayload: CartItemSubscriptionPayloadObject
+      CartItemPreviousValues: CartItemPreviousValuesObject
     }
     fieldsDetails: {
       Query: QueryFieldDetails
@@ -33,25 +45,62 @@ export interface NexusPrismaTypes {
       PageInfo: PageInfoFieldDetails
       UserEdge: UserEdgeFieldDetails
       AggregateUser: AggregateUserFieldDetails
+      Item: ItemFieldDetails
+      ItemConnection: ItemConnectionFieldDetails
+      ItemEdge: ItemEdgeFieldDetails
+      AggregateItem: AggregateItemFieldDetails
+      CartItem: CartItemFieldDetails
+      CartItemConnection: CartItemConnectionFieldDetails
+      CartItemEdge: CartItemEdgeFieldDetails
+      AggregateCartItem: AggregateCartItemFieldDetails
       Mutation: MutationFieldDetails
       BatchPayload: BatchPayloadFieldDetails
       Subscription: SubscriptionFieldDetails
       UserSubscriptionPayload: UserSubscriptionPayloadFieldDetails
       UserPreviousValues: UserPreviousValuesFieldDetails
+      ItemSubscriptionPayload: ItemSubscriptionPayloadFieldDetails
+      ItemPreviousValues: ItemPreviousValuesFieldDetails
+      CartItemSubscriptionPayload: CartItemSubscriptionPayloadFieldDetails
+      CartItemPreviousValues: CartItemPreviousValuesFieldDetails
     }
   }
   inputTypes: {
     fields: {
       UserWhereUniqueInput: UserWhereUniqueInputInputObject
       UserWhereInput: UserWhereInputInputObject
+      ItemWhereUniqueInput: ItemWhereUniqueInputInputObject
+      ItemWhereInput: ItemWhereInputInputObject
+      CartItemWhereUniqueInput: CartItemWhereUniqueInputInputObject
+      CartItemWhereInput: CartItemWhereInputInputObject
       UserCreateInput: UserCreateInputInputObject
+      UserCreatepermissionsInput: UserCreatepermissionsInputInputObject
       UserUpdateInput: UserUpdateInputInputObject
+      UserUpdatepermissionsInput: UserUpdatepermissionsInputInputObject
       UserUpdateManyMutationInput: UserUpdateManyMutationInputInputObject
+      ItemCreateInput: ItemCreateInputInputObject
+      UserCreateOneInput: UserCreateOneInputInputObject
+      ItemUpdateInput: ItemUpdateInputInputObject
+      UserUpdateOneRequiredInput: UserUpdateOneRequiredInputInputObject
+      UserUpdateDataInput: UserUpdateDataInputInputObject
+      UserUpsertNestedInput: UserUpsertNestedInputInputObject
+      ItemUpdateManyMutationInput: ItemUpdateManyMutationInputInputObject
+      CartItemCreateInput: CartItemCreateInputInputObject
+      ItemCreateOneInput: ItemCreateOneInputInputObject
+      CartItemUpdateInput: CartItemUpdateInputInputObject
+      ItemUpdateOneInput: ItemUpdateOneInputInputObject
+      ItemUpdateDataInput: ItemUpdateDataInputInputObject
+      ItemUpsertNestedInput: ItemUpsertNestedInputInputObject
+      CartItemUpdateManyMutationInput: CartItemUpdateManyMutationInputInputObject
       UserSubscriptionWhereInput: UserSubscriptionWhereInputInputObject
+      ItemSubscriptionWhereInput: ItemSubscriptionWhereInputInputObject
+      CartItemSubscriptionWhereInput: CartItemSubscriptionWhereInputInputObject
     }
   }
   enumTypes: {
+    Permission: PermissionValues,
     UserOrderByInput: UserOrderByInputValues,
+    ItemOrderByInput: ItemOrderByInputValues,
+    CartItemOrderByInput: CartItemOrderByInputValues,
     MutationType: MutationTypeValues,
   }
 }
@@ -63,11 +112,23 @@ type QueryObject =
   | { name: 'user', args?: QueryUserArgs[] | false, alias?: string  } 
   | { name: 'users', args?: QueryUsersArgs[] | false, alias?: string  } 
   | { name: 'usersConnection', args?: QueryUsersConnectionArgs[] | false, alias?: string  } 
+  | { name: 'item', args?: QueryItemArgs[] | false, alias?: string  } 
+  | { name: 'items', args?: QueryItemsArgs[] | false, alias?: string  } 
+  | { name: 'itemsConnection', args?: QueryItemsConnectionArgs[] | false, alias?: string  } 
+  | { name: 'cartItem', args?: QueryCartItemArgs[] | false, alias?: string  } 
+  | { name: 'cartItems', args?: QueryCartItemsArgs[] | false, alias?: string  } 
+  | { name: 'cartItemsConnection', args?: QueryCartItemsConnectionArgs[] | false, alias?: string  } 
 
 type QueryFields =
   | 'user'
   | 'users'
   | 'usersConnection'
+  | 'item'
+  | 'items'
+  | 'itemsConnection'
+  | 'cartItem'
+  | 'cartItems'
+  | 'cartItemsConnection'
 
 
 type QueryUserArgs =
@@ -81,6 +142,42 @@ type QueryUsersArgs =
   | 'first'
   | 'last'
 type QueryUsersConnectionArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryItemArgs =
+  | 'where'
+type QueryItemsArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryItemsConnectionArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryCartItemArgs =
+  | 'where'
+type QueryCartItemsArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryCartItemsConnectionArgs =
   | 'where'
   | 'orderBy'
   | 'skip'
@@ -130,6 +227,84 @@ export interface QueryFieldDetails {
       info?: GraphQLResolveInfo
     ) => Promise<prisma.UserConnection> | prisma.UserConnection
   }
+  item: {
+    type: 'Item'
+    args: Record<QueryItemArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where: ItemWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Item | null> | prisma.Item | null
+  }
+  items: {
+    type: 'Item'
+    args: Record<QueryItemsArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: ItemWhereInput | null, orderBy?: prisma.ItemOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Item[]> | prisma.Item[]
+  }
+  itemsConnection: {
+    type: 'ItemConnection'
+    args: Record<QueryItemsConnectionArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: ItemWhereInput | null, orderBy?: prisma.ItemOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ItemConnection> | prisma.ItemConnection
+  }
+  cartItem: {
+    type: 'CartItem'
+    args: Record<QueryCartItemArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where: CartItemWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.CartItem | null> | prisma.CartItem | null
+  }
+  cartItems: {
+    type: 'CartItem'
+    args: Record<QueryCartItemsArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: CartItemWhereInput | null, orderBy?: prisma.CartItemOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.CartItem[]> | prisma.CartItem[]
+  }
+  cartItemsConnection: {
+    type: 'CartItemConnection'
+    args: Record<QueryCartItemsConnectionArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: CartItemWhereInput | null, orderBy?: prisma.CartItemOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.CartItemConnection> | prisma.CartItemConnection
+  }
 }
   
 
@@ -139,10 +314,16 @@ type UserObject =
   | UserFields
   | { name: 'id', args?: [] | false, alias?: string  } 
   | { name: 'name', args?: [] | false, alias?: string  } 
+  | { name: 'email', args?: [] | false, alias?: string  } 
+  | { name: 'password', args?: [] | false, alias?: string  } 
+  | { name: 'permissions', args?: [] | false, alias?: string  } 
 
 type UserFields =
   | 'id'
   | 'name'
+  | 'email'
+  | 'password'
+  | 'permissions'
 
 
 
@@ -164,6 +345,35 @@ export interface UserFieldDetails {
     list: undefined
     nullable: false
     resolve: undefined
+  }
+  email: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  password: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  permissions: {
+    type: 'Permission'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"User">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Permission[]> | prisma.Permission[]
   }
 }
   
@@ -348,6 +558,411 @@ export interface AggregateUserFieldDetails {
 }
   
 
+// Types for Item
+
+type ItemObject =
+  | ItemFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'title', args?: [] | false, alias?: string  } 
+  | { name: 'description', args?: [] | false, alias?: string  } 
+  | { name: 'image', args?: [] | false, alias?: string  } 
+  | { name: 'largeImage', args?: [] | false, alias?: string  } 
+  | { name: 'price', args?: [] | false, alias?: string  } 
+  | { name: 'user', args?: [] | false, alias?: string  } 
+
+type ItemFields =
+  | 'id'
+  | 'title'
+  | 'description'
+  | 'image'
+  | 'largeImage'
+  | 'price'
+  | 'user'
+
+
+
+  
+
+export interface ItemFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  title: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  description: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  image: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+  largeImage: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+  price: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  user: {
+    type: 'User'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Item">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User> | prisma.User
+  }
+}
+  
+
+// Types for ItemConnection
+
+type ItemConnectionObject =
+  | ItemConnectionFields
+  | { name: 'pageInfo', args?: [] | false, alias?: string  } 
+  | { name: 'edges', args?: [] | false, alias?: string  } 
+  | { name: 'aggregate', args?: [] | false, alias?: string  } 
+
+type ItemConnectionFields =
+  | 'pageInfo'
+  | 'edges'
+  | 'aggregate'
+
+
+
+  
+
+export interface ItemConnectionFieldDetails {
+  pageInfo: {
+    type: 'PageInfo'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"ItemConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.PageInfo> | prisma.PageInfo
+  }
+  edges: {
+    type: 'ItemEdge'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"ItemConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ItemEdge[]> | prisma.ItemEdge[]
+  }
+  aggregate: {
+    type: 'AggregateItem'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"ItemConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AggregateItem> | prisma.AggregateItem
+  }
+}
+  
+
+// Types for ItemEdge
+
+type ItemEdgeObject =
+  | ItemEdgeFields
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'cursor', args?: [] | false, alias?: string  } 
+
+type ItemEdgeFields =
+  | 'node'
+  | 'cursor'
+
+
+
+  
+
+export interface ItemEdgeFieldDetails {
+  node: {
+    type: 'Item'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"ItemEdge">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Item> | prisma.Item
+  }
+  cursor: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for AggregateItem
+
+type AggregateItemObject =
+  | AggregateItemFields
+  | { name: 'count', args?: [] | false, alias?: string  } 
+
+type AggregateItemFields =
+  | 'count'
+
+
+
+  
+
+export interface AggregateItemFieldDetails {
+  count: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for CartItem
+
+type CartItemObject =
+  | CartItemFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'quantity', args?: [] | false, alias?: string  } 
+  | { name: 'item', args?: [] | false, alias?: string  } 
+  | { name: 'user', args?: [] | false, alias?: string  } 
+
+type CartItemFields =
+  | 'id'
+  | 'quantity'
+  | 'item'
+  | 'user'
+
+
+
+  
+
+export interface CartItemFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  quantity: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  item: {
+    type: 'Item'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"CartItem">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Item | null> | prisma.Item | null
+  }
+  user: {
+    type: 'User'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"CartItem">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User> | prisma.User
+  }
+}
+  
+
+// Types for CartItemConnection
+
+type CartItemConnectionObject =
+  | CartItemConnectionFields
+  | { name: 'pageInfo', args?: [] | false, alias?: string  } 
+  | { name: 'edges', args?: [] | false, alias?: string  } 
+  | { name: 'aggregate', args?: [] | false, alias?: string  } 
+
+type CartItemConnectionFields =
+  | 'pageInfo'
+  | 'edges'
+  | 'aggregate'
+
+
+
+  
+
+export interface CartItemConnectionFieldDetails {
+  pageInfo: {
+    type: 'PageInfo'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"CartItemConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.PageInfo> | prisma.PageInfo
+  }
+  edges: {
+    type: 'CartItemEdge'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"CartItemConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.CartItemEdge[]> | prisma.CartItemEdge[]
+  }
+  aggregate: {
+    type: 'AggregateCartItem'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"CartItemConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AggregateCartItem> | prisma.AggregateCartItem
+  }
+}
+  
+
+// Types for CartItemEdge
+
+type CartItemEdgeObject =
+  | CartItemEdgeFields
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'cursor', args?: [] | false, alias?: string  } 
+
+type CartItemEdgeFields =
+  | 'node'
+  | 'cursor'
+
+
+
+  
+
+export interface CartItemEdgeFieldDetails {
+  node: {
+    type: 'CartItem'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"CartItemEdge">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.CartItem> | prisma.CartItem
+  }
+  cursor: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for AggregateCartItem
+
+type AggregateCartItemObject =
+  | AggregateCartItemFields
+  | { name: 'count', args?: [] | false, alias?: string  } 
+
+type AggregateCartItemFields =
+  | 'count'
+
+
+
+  
+
+export interface AggregateCartItemFieldDetails {
+  count: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
 // Types for Mutation
 
 type MutationObject =
@@ -358,6 +973,18 @@ type MutationObject =
   | { name: 'upsertUser', args?: MutationUpsertUserArgs[] | false, alias?: string  } 
   | { name: 'deleteUser', args?: MutationDeleteUserArgs[] | false, alias?: string  } 
   | { name: 'deleteManyUsers', args?: MutationDeleteManyUsersArgs[] | false, alias?: string  } 
+  | { name: 'createItem', args?: MutationCreateItemArgs[] | false, alias?: string  } 
+  | { name: 'updateItem', args?: MutationUpdateItemArgs[] | false, alias?: string  } 
+  | { name: 'updateManyItems', args?: MutationUpdateManyItemsArgs[] | false, alias?: string  } 
+  | { name: 'upsertItem', args?: MutationUpsertItemArgs[] | false, alias?: string  } 
+  | { name: 'deleteItem', args?: MutationDeleteItemArgs[] | false, alias?: string  } 
+  | { name: 'deleteManyItems', args?: MutationDeleteManyItemsArgs[] | false, alias?: string  } 
+  | { name: 'createCartItem', args?: MutationCreateCartItemArgs[] | false, alias?: string  } 
+  | { name: 'updateCartItem', args?: MutationUpdateCartItemArgs[] | false, alias?: string  } 
+  | { name: 'updateManyCartItems', args?: MutationUpdateManyCartItemsArgs[] | false, alias?: string  } 
+  | { name: 'upsertCartItem', args?: MutationUpsertCartItemArgs[] | false, alias?: string  } 
+  | { name: 'deleteCartItem', args?: MutationDeleteCartItemArgs[] | false, alias?: string  } 
+  | { name: 'deleteManyCartItems', args?: MutationDeleteManyCartItemsArgs[] | false, alias?: string  } 
 
 type MutationFields =
   | 'createUser'
@@ -366,6 +993,18 @@ type MutationFields =
   | 'upsertUser'
   | 'deleteUser'
   | 'deleteManyUsers'
+  | 'createItem'
+  | 'updateItem'
+  | 'updateManyItems'
+  | 'upsertItem'
+  | 'deleteItem'
+  | 'deleteManyItems'
+  | 'createCartItem'
+  | 'updateCartItem'
+  | 'updateManyCartItems'
+  | 'upsertCartItem'
+  | 'deleteCartItem'
+  | 'deleteManyCartItems'
 
 
 type MutationCreateUserArgs =
@@ -383,6 +1022,38 @@ type MutationUpsertUserArgs =
 type MutationDeleteUserArgs =
   | 'where'
 type MutationDeleteManyUsersArgs =
+  | 'where'
+type MutationCreateItemArgs =
+  | 'data'
+type MutationUpdateItemArgs =
+  | 'data'
+  | 'where'
+type MutationUpdateManyItemsArgs =
+  | 'data'
+  | 'where'
+type MutationUpsertItemArgs =
+  | 'where'
+  | 'create'
+  | 'update'
+type MutationDeleteItemArgs =
+  | 'where'
+type MutationDeleteManyItemsArgs =
+  | 'where'
+type MutationCreateCartItemArgs =
+  | 'data'
+type MutationUpdateCartItemArgs =
+  | 'data'
+  | 'where'
+type MutationUpdateManyCartItemsArgs =
+  | 'data'
+  | 'where'
+type MutationUpsertCartItemArgs =
+  | 'where'
+  | 'create'
+  | 'update'
+type MutationDeleteCartItemArgs =
+  | 'where'
+type MutationDeleteManyCartItemsArgs =
   | 'where'
   
 
@@ -465,6 +1136,162 @@ export interface MutationFieldDetails {
       info?: GraphQLResolveInfo
     ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
   }
+  createItem: {
+    type: 'Item'
+    args: Record<MutationCreateItemArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: ItemCreateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Item> | prisma.Item
+  }
+  updateItem: {
+    type: 'Item'
+    args: Record<MutationUpdateItemArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: ItemUpdateInput, where: ItemWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Item | null> | prisma.Item | null
+  }
+  updateManyItems: {
+    type: 'BatchPayload'
+    args: Record<MutationUpdateManyItemsArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: ItemUpdateManyMutationInput, where?: ItemWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  upsertItem: {
+    type: 'Item'
+    args: Record<MutationUpsertItemArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: ItemWhereUniqueInput, create: ItemCreateInput, update: ItemUpdateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Item> | prisma.Item
+  }
+  deleteItem: {
+    type: 'Item'
+    args: Record<MutationDeleteItemArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: ItemWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Item | null> | prisma.Item | null
+  }
+  deleteManyItems: {
+    type: 'BatchPayload'
+    args: Record<MutationDeleteManyItemsArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where?: ItemWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  createCartItem: {
+    type: 'CartItem'
+    args: Record<MutationCreateCartItemArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: CartItemCreateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.CartItem> | prisma.CartItem
+  }
+  updateCartItem: {
+    type: 'CartItem'
+    args: Record<MutationUpdateCartItemArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: CartItemUpdateInput, where: CartItemWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.CartItem | null> | prisma.CartItem | null
+  }
+  updateManyCartItems: {
+    type: 'BatchPayload'
+    args: Record<MutationUpdateManyCartItemsArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: CartItemUpdateManyMutationInput, where?: CartItemWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  upsertCartItem: {
+    type: 'CartItem'
+    args: Record<MutationUpsertCartItemArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: CartItemWhereUniqueInput, create: CartItemCreateInput, update: CartItemUpdateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.CartItem> | prisma.CartItem
+  }
+  deleteCartItem: {
+    type: 'CartItem'
+    args: Record<MutationDeleteCartItemArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: CartItemWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.CartItem | null> | prisma.CartItem | null
+  }
+  deleteManyCartItems: {
+    type: 'BatchPayload'
+    args: Record<MutationDeleteManyCartItemsArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where?: CartItemWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
 }
   
 
@@ -498,12 +1325,20 @@ export interface BatchPayloadFieldDetails {
 type SubscriptionObject =
   | SubscriptionFields
   | { name: 'user', args?: SubscriptionUserArgs[] | false, alias?: string  } 
+  | { name: 'item', args?: SubscriptionItemArgs[] | false, alias?: string  } 
+  | { name: 'cartItem', args?: SubscriptionCartItemArgs[] | false, alias?: string  } 
 
 type SubscriptionFields =
   | 'user'
+  | 'item'
+  | 'cartItem'
 
 
 type SubscriptionUserArgs =
+  | 'where'
+type SubscriptionItemArgs =
+  | 'where'
+type SubscriptionCartItemArgs =
   | 'where'
   
 
@@ -520,6 +1355,32 @@ export interface SubscriptionFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.UserSubscriptionPayload | null> | prisma.UserSubscriptionPayload | null
+  }
+  item: {
+    type: 'ItemSubscriptionPayload'
+    args: Record<SubscriptionItemArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Subscription">,
+      args: { where?: ItemSubscriptionWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ItemSubscriptionPayload | null> | prisma.ItemSubscriptionPayload | null
+  }
+  cartItem: {
+    type: 'CartItemSubscriptionPayload'
+    args: Record<SubscriptionCartItemArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Subscription">,
+      args: { where?: CartItemSubscriptionWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.CartItemSubscriptionPayload | null> | prisma.CartItemSubscriptionPayload | null
   }
 }
   
@@ -600,10 +1461,16 @@ type UserPreviousValuesObject =
   | UserPreviousValuesFields
   | { name: 'id', args?: [] | false, alias?: string  } 
   | { name: 'name', args?: [] | false, alias?: string  } 
+  | { name: 'email', args?: [] | false, alias?: string  } 
+  | { name: 'password', args?: [] | false, alias?: string  } 
+  | { name: 'permissions', args?: [] | false, alias?: string  } 
 
 type UserPreviousValuesFields =
   | 'id'
   | 'name'
+  | 'email'
+  | 'password'
+  | 'permissions'
 
 
 
@@ -626,16 +1493,297 @@ export interface UserPreviousValuesFieldDetails {
     nullable: false
     resolve: undefined
   }
+  email: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  password: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  permissions: {
+    type: 'Permission'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"UserPreviousValues">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Permission[]> | prisma.Permission[]
+  }
+}
+  
+
+// Types for ItemSubscriptionPayload
+
+type ItemSubscriptionPayloadObject =
+  | ItemSubscriptionPayloadFields
+  | { name: 'mutation', args?: [] | false, alias?: string  } 
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'updatedFields', args?: [] | false, alias?: string  } 
+  | { name: 'previousValues', args?: [] | false, alias?: string  } 
+
+type ItemSubscriptionPayloadFields =
+  | 'mutation'
+  | 'node'
+  | 'updatedFields'
+  | 'previousValues'
+
+
+
+  
+
+export interface ItemSubscriptionPayloadFieldDetails {
+  mutation: {
+    type: 'MutationType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"ItemSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MutationType> | prisma.MutationType
+  }
+  node: {
+    type: 'Item'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"ItemSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Item | null> | prisma.Item | null
+  }
+  updatedFields: {
+    type: 'String'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: undefined
+  }
+  previousValues: {
+    type: 'ItemPreviousValues'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"ItemSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ItemPreviousValues | null> | prisma.ItemPreviousValues | null
+  }
+}
+  
+
+// Types for ItemPreviousValues
+
+type ItemPreviousValuesObject =
+  | ItemPreviousValuesFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'title', args?: [] | false, alias?: string  } 
+  | { name: 'description', args?: [] | false, alias?: string  } 
+  | { name: 'image', args?: [] | false, alias?: string  } 
+  | { name: 'largeImage', args?: [] | false, alias?: string  } 
+  | { name: 'price', args?: [] | false, alias?: string  } 
+
+type ItemPreviousValuesFields =
+  | 'id'
+  | 'title'
+  | 'description'
+  | 'image'
+  | 'largeImage'
+  | 'price'
+
+
+
+  
+
+export interface ItemPreviousValuesFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  title: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  description: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  image: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+  largeImage: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+  price: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for CartItemSubscriptionPayload
+
+type CartItemSubscriptionPayloadObject =
+  | CartItemSubscriptionPayloadFields
+  | { name: 'mutation', args?: [] | false, alias?: string  } 
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'updatedFields', args?: [] | false, alias?: string  } 
+  | { name: 'previousValues', args?: [] | false, alias?: string  } 
+
+type CartItemSubscriptionPayloadFields =
+  | 'mutation'
+  | 'node'
+  | 'updatedFields'
+  | 'previousValues'
+
+
+
+  
+
+export interface CartItemSubscriptionPayloadFieldDetails {
+  mutation: {
+    type: 'MutationType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"CartItemSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MutationType> | prisma.MutationType
+  }
+  node: {
+    type: 'CartItem'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"CartItemSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.CartItem | null> | prisma.CartItem | null
+  }
+  updatedFields: {
+    type: 'String'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: undefined
+  }
+  previousValues: {
+    type: 'CartItemPreviousValues'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"CartItemSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.CartItemPreviousValues | null> | prisma.CartItemPreviousValues | null
+  }
+}
+  
+
+// Types for CartItemPreviousValues
+
+type CartItemPreviousValuesObject =
+  | CartItemPreviousValuesFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'quantity', args?: [] | false, alias?: string  } 
+
+type CartItemPreviousValuesFields =
+  | 'id'
+  | 'quantity'
+
+
+
+  
+
+export interface CartItemPreviousValuesFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  quantity: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
 }
   
 
 
 export interface UserWhereUniqueInput {
   id?: string | null
+  email?: string | null
 }
 export type UserWhereUniqueInputInputObject =
   | Extract<keyof UserWhereUniqueInput, string>
   | { name: 'id', alias?: string  } 
+  | { name: 'email', alias?: string  } 
   
 export interface UserWhereInput {
   id?: string | null
@@ -666,6 +1814,34 @@ export interface UserWhereInput {
   name_not_starts_with?: string | null
   name_ends_with?: string | null
   name_not_ends_with?: string | null
+  email?: string | null
+  email_not?: string | null
+  email_in?: string[]
+  email_not_in?: string[]
+  email_lt?: string | null
+  email_lte?: string | null
+  email_gt?: string | null
+  email_gte?: string | null
+  email_contains?: string | null
+  email_not_contains?: string | null
+  email_starts_with?: string | null
+  email_not_starts_with?: string | null
+  email_ends_with?: string | null
+  email_not_ends_with?: string | null
+  password?: string | null
+  password_not?: string | null
+  password_in?: string[]
+  password_not_in?: string[]
+  password_lt?: string | null
+  password_lte?: string | null
+  password_gt?: string | null
+  password_gte?: string | null
+  password_contains?: string | null
+  password_not_contains?: string | null
+  password_starts_with?: string | null
+  password_not_starts_with?: string | null
+  password_ends_with?: string | null
+  password_not_ends_with?: string | null
   AND?: UserWhereInput[]
   OR?: UserWhereInput[]
   NOT?: UserWhereInput[]
@@ -700,30 +1876,506 @@ export type UserWhereInputInputObject =
   | { name: 'name_not_starts_with', alias?: string  } 
   | { name: 'name_ends_with', alias?: string  } 
   | { name: 'name_not_ends_with', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'email_not', alias?: string  } 
+  | { name: 'email_in', alias?: string  } 
+  | { name: 'email_not_in', alias?: string  } 
+  | { name: 'email_lt', alias?: string  } 
+  | { name: 'email_lte', alias?: string  } 
+  | { name: 'email_gt', alias?: string  } 
+  | { name: 'email_gte', alias?: string  } 
+  | { name: 'email_contains', alias?: string  } 
+  | { name: 'email_not_contains', alias?: string  } 
+  | { name: 'email_starts_with', alias?: string  } 
+  | { name: 'email_not_starts_with', alias?: string  } 
+  | { name: 'email_ends_with', alias?: string  } 
+  | { name: 'email_not_ends_with', alias?: string  } 
+  | { name: 'password', alias?: string  } 
+  | { name: 'password_not', alias?: string  } 
+  | { name: 'password_in', alias?: string  } 
+  | { name: 'password_not_in', alias?: string  } 
+  | { name: 'password_lt', alias?: string  } 
+  | { name: 'password_lte', alias?: string  } 
+  | { name: 'password_gt', alias?: string  } 
+  | { name: 'password_gte', alias?: string  } 
+  | { name: 'password_contains', alias?: string  } 
+  | { name: 'password_not_contains', alias?: string  } 
+  | { name: 'password_starts_with', alias?: string  } 
+  | { name: 'password_not_starts_with', alias?: string  } 
+  | { name: 'password_ends_with', alias?: string  } 
+  | { name: 'password_not_ends_with', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
+export interface ItemWhereUniqueInput {
+  id?: string | null
+}
+export type ItemWhereUniqueInputInputObject =
+  | Extract<keyof ItemWhereUniqueInput, string>
+  | { name: 'id', alias?: string  } 
+  
+export interface ItemWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  title?: string | null
+  title_not?: string | null
+  title_in?: string[]
+  title_not_in?: string[]
+  title_lt?: string | null
+  title_lte?: string | null
+  title_gt?: string | null
+  title_gte?: string | null
+  title_contains?: string | null
+  title_not_contains?: string | null
+  title_starts_with?: string | null
+  title_not_starts_with?: string | null
+  title_ends_with?: string | null
+  title_not_ends_with?: string | null
+  description?: string | null
+  description_not?: string | null
+  description_in?: string[]
+  description_not_in?: string[]
+  description_lt?: string | null
+  description_lte?: string | null
+  description_gt?: string | null
+  description_gte?: string | null
+  description_contains?: string | null
+  description_not_contains?: string | null
+  description_starts_with?: string | null
+  description_not_starts_with?: string | null
+  description_ends_with?: string | null
+  description_not_ends_with?: string | null
+  image?: string | null
+  image_not?: string | null
+  image_in?: string[]
+  image_not_in?: string[]
+  image_lt?: string | null
+  image_lte?: string | null
+  image_gt?: string | null
+  image_gte?: string | null
+  image_contains?: string | null
+  image_not_contains?: string | null
+  image_starts_with?: string | null
+  image_not_starts_with?: string | null
+  image_ends_with?: string | null
+  image_not_ends_with?: string | null
+  largeImage?: string | null
+  largeImage_not?: string | null
+  largeImage_in?: string[]
+  largeImage_not_in?: string[]
+  largeImage_lt?: string | null
+  largeImage_lte?: string | null
+  largeImage_gt?: string | null
+  largeImage_gte?: string | null
+  largeImage_contains?: string | null
+  largeImage_not_contains?: string | null
+  largeImage_starts_with?: string | null
+  largeImage_not_starts_with?: string | null
+  largeImage_ends_with?: string | null
+  largeImage_not_ends_with?: string | null
+  price?: number | null
+  price_not?: number | null
+  price_in?: number[]
+  price_not_in?: number[]
+  price_lt?: number | null
+  price_lte?: number | null
+  price_gt?: number | null
+  price_gte?: number | null
+  user?: UserWhereInput | null
+  AND?: ItemWhereInput[]
+  OR?: ItemWhereInput[]
+  NOT?: ItemWhereInput[]
+}
+export type ItemWhereInputInputObject =
+  | Extract<keyof ItemWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'title', alias?: string  } 
+  | { name: 'title_not', alias?: string  } 
+  | { name: 'title_in', alias?: string  } 
+  | { name: 'title_not_in', alias?: string  } 
+  | { name: 'title_lt', alias?: string  } 
+  | { name: 'title_lte', alias?: string  } 
+  | { name: 'title_gt', alias?: string  } 
+  | { name: 'title_gte', alias?: string  } 
+  | { name: 'title_contains', alias?: string  } 
+  | { name: 'title_not_contains', alias?: string  } 
+  | { name: 'title_starts_with', alias?: string  } 
+  | { name: 'title_not_starts_with', alias?: string  } 
+  | { name: 'title_ends_with', alias?: string  } 
+  | { name: 'title_not_ends_with', alias?: string  } 
+  | { name: 'description', alias?: string  } 
+  | { name: 'description_not', alias?: string  } 
+  | { name: 'description_in', alias?: string  } 
+  | { name: 'description_not_in', alias?: string  } 
+  | { name: 'description_lt', alias?: string  } 
+  | { name: 'description_lte', alias?: string  } 
+  | { name: 'description_gt', alias?: string  } 
+  | { name: 'description_gte', alias?: string  } 
+  | { name: 'description_contains', alias?: string  } 
+  | { name: 'description_not_contains', alias?: string  } 
+  | { name: 'description_starts_with', alias?: string  } 
+  | { name: 'description_not_starts_with', alias?: string  } 
+  | { name: 'description_ends_with', alias?: string  } 
+  | { name: 'description_not_ends_with', alias?: string  } 
+  | { name: 'image', alias?: string  } 
+  | { name: 'image_not', alias?: string  } 
+  | { name: 'image_in', alias?: string  } 
+  | { name: 'image_not_in', alias?: string  } 
+  | { name: 'image_lt', alias?: string  } 
+  | { name: 'image_lte', alias?: string  } 
+  | { name: 'image_gt', alias?: string  } 
+  | { name: 'image_gte', alias?: string  } 
+  | { name: 'image_contains', alias?: string  } 
+  | { name: 'image_not_contains', alias?: string  } 
+  | { name: 'image_starts_with', alias?: string  } 
+  | { name: 'image_not_starts_with', alias?: string  } 
+  | { name: 'image_ends_with', alias?: string  } 
+  | { name: 'image_not_ends_with', alias?: string  } 
+  | { name: 'largeImage', alias?: string  } 
+  | { name: 'largeImage_not', alias?: string  } 
+  | { name: 'largeImage_in', alias?: string  } 
+  | { name: 'largeImage_not_in', alias?: string  } 
+  | { name: 'largeImage_lt', alias?: string  } 
+  | { name: 'largeImage_lte', alias?: string  } 
+  | { name: 'largeImage_gt', alias?: string  } 
+  | { name: 'largeImage_gte', alias?: string  } 
+  | { name: 'largeImage_contains', alias?: string  } 
+  | { name: 'largeImage_not_contains', alias?: string  } 
+  | { name: 'largeImage_starts_with', alias?: string  } 
+  | { name: 'largeImage_not_starts_with', alias?: string  } 
+  | { name: 'largeImage_ends_with', alias?: string  } 
+  | { name: 'largeImage_not_ends_with', alias?: string  } 
+  | { name: 'price', alias?: string  } 
+  | { name: 'price_not', alias?: string  } 
+  | { name: 'price_in', alias?: string  } 
+  | { name: 'price_not_in', alias?: string  } 
+  | { name: 'price_lt', alias?: string  } 
+  | { name: 'price_lte', alias?: string  } 
+  | { name: 'price_gt', alias?: string  } 
+  | { name: 'price_gte', alias?: string  } 
+  | { name: 'user', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
+export interface CartItemWhereUniqueInput {
+  id?: string | null
+}
+export type CartItemWhereUniqueInputInputObject =
+  | Extract<keyof CartItemWhereUniqueInput, string>
+  | { name: 'id', alias?: string  } 
+  
+export interface CartItemWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  quantity?: number | null
+  quantity_not?: number | null
+  quantity_in?: number[]
+  quantity_not_in?: number[]
+  quantity_lt?: number | null
+  quantity_lte?: number | null
+  quantity_gt?: number | null
+  quantity_gte?: number | null
+  item?: ItemWhereInput | null
+  user?: UserWhereInput | null
+  AND?: CartItemWhereInput[]
+  OR?: CartItemWhereInput[]
+  NOT?: CartItemWhereInput[]
+}
+export type CartItemWhereInputInputObject =
+  | Extract<keyof CartItemWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'quantity', alias?: string  } 
+  | { name: 'quantity_not', alias?: string  } 
+  | { name: 'quantity_in', alias?: string  } 
+  | { name: 'quantity_not_in', alias?: string  } 
+  | { name: 'quantity_lt', alias?: string  } 
+  | { name: 'quantity_lte', alias?: string  } 
+  | { name: 'quantity_gt', alias?: string  } 
+  | { name: 'quantity_gte', alias?: string  } 
+  | { name: 'item', alias?: string  } 
+  | { name: 'user', alias?: string  } 
   | { name: 'AND', alias?: string  } 
   | { name: 'OR', alias?: string  } 
   | { name: 'NOT', alias?: string  } 
   
 export interface UserCreateInput {
   name?: string
+  email?: string
+  password?: string
+  permissions?: UserCreatepermissionsInput | null
 }
 export type UserCreateInputInputObject =
   | Extract<keyof UserCreateInput, string>
   | { name: 'name', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
+  | { name: 'permissions', alias?: string  } 
+  
+export interface UserCreatepermissionsInput {
+  set?: prisma.Permission[]
+}
+export type UserCreatepermissionsInputInputObject =
+  | Extract<keyof UserCreatepermissionsInput, string>
+  | { name: 'set', alias?: string  } 
   
 export interface UserUpdateInput {
   name?: string | null
+  email?: string | null
+  password?: string | null
+  permissions?: UserUpdatepermissionsInput | null
 }
 export type UserUpdateInputInputObject =
   | Extract<keyof UserUpdateInput, string>
   | { name: 'name', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
+  | { name: 'permissions', alias?: string  } 
+  
+export interface UserUpdatepermissionsInput {
+  set?: prisma.Permission[]
+}
+export type UserUpdatepermissionsInputInputObject =
+  | Extract<keyof UserUpdatepermissionsInput, string>
+  | { name: 'set', alias?: string  } 
   
 export interface UserUpdateManyMutationInput {
   name?: string | null
+  email?: string | null
+  password?: string | null
+  permissions?: UserUpdatepermissionsInput | null
 }
 export type UserUpdateManyMutationInputInputObject =
   | Extract<keyof UserUpdateManyMutationInput, string>
   | { name: 'name', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
+  | { name: 'permissions', alias?: string  } 
+  
+export interface ItemCreateInput {
+  title?: string
+  description?: string
+  image?: string | null
+  largeImage?: string | null
+  price?: number
+  user?: UserCreateOneInput
+}
+export type ItemCreateInputInputObject =
+  | Extract<keyof ItemCreateInput, string>
+  | { name: 'title', alias?: string  } 
+  | { name: 'description', alias?: string  } 
+  | { name: 'image', alias?: string  } 
+  | { name: 'largeImage', alias?: string  } 
+  | { name: 'price', alias?: string  } 
+  | { name: 'user', alias?: string  } 
+  
+export interface UserCreateOneInput {
+  create?: UserCreateInput | null
+  connect?: UserWhereUniqueInput | null
+}
+export type UserCreateOneInputInputObject =
+  | Extract<keyof UserCreateOneInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface ItemUpdateInput {
+  title?: string | null
+  description?: string | null
+  image?: string | null
+  largeImage?: string | null
+  price?: number | null
+  user?: UserUpdateOneRequiredInput | null
+}
+export type ItemUpdateInputInputObject =
+  | Extract<keyof ItemUpdateInput, string>
+  | { name: 'title', alias?: string  } 
+  | { name: 'description', alias?: string  } 
+  | { name: 'image', alias?: string  } 
+  | { name: 'largeImage', alias?: string  } 
+  | { name: 'price', alias?: string  } 
+  | { name: 'user', alias?: string  } 
+  
+export interface UserUpdateOneRequiredInput {
+  create?: UserCreateInput | null
+  update?: UserUpdateDataInput | null
+  upsert?: UserUpsertNestedInput | null
+  connect?: UserWhereUniqueInput | null
+}
+export type UserUpdateOneRequiredInputInputObject =
+  | Extract<keyof UserUpdateOneRequiredInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface UserUpdateDataInput {
+  name?: string | null
+  email?: string | null
+  password?: string | null
+  permissions?: UserUpdatepermissionsInput | null
+}
+export type UserUpdateDataInputInputObject =
+  | Extract<keyof UserUpdateDataInput, string>
+  | { name: 'name', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
+  | { name: 'permissions', alias?: string  } 
+  
+export interface UserUpsertNestedInput {
+  update?: UserUpdateDataInput
+  create?: UserCreateInput
+}
+export type UserUpsertNestedInputInputObject =
+  | Extract<keyof UserUpsertNestedInput, string>
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface ItemUpdateManyMutationInput {
+  title?: string | null
+  description?: string | null
+  image?: string | null
+  largeImage?: string | null
+  price?: number | null
+}
+export type ItemUpdateManyMutationInputInputObject =
+  | Extract<keyof ItemUpdateManyMutationInput, string>
+  | { name: 'title', alias?: string  } 
+  | { name: 'description', alias?: string  } 
+  | { name: 'image', alias?: string  } 
+  | { name: 'largeImage', alias?: string  } 
+  | { name: 'price', alias?: string  } 
+  
+export interface CartItemCreateInput {
+  quantity?: number | null
+  item?: ItemCreateOneInput | null
+  user?: UserCreateOneInput
+}
+export type CartItemCreateInputInputObject =
+  | Extract<keyof CartItemCreateInput, string>
+  | { name: 'quantity', alias?: string  } 
+  | { name: 'item', alias?: string  } 
+  | { name: 'user', alias?: string  } 
+  
+export interface ItemCreateOneInput {
+  create?: ItemCreateInput | null
+  connect?: ItemWhereUniqueInput | null
+}
+export type ItemCreateOneInputInputObject =
+  | Extract<keyof ItemCreateOneInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface CartItemUpdateInput {
+  quantity?: number | null
+  item?: ItemUpdateOneInput | null
+  user?: UserUpdateOneRequiredInput | null
+}
+export type CartItemUpdateInputInputObject =
+  | Extract<keyof CartItemUpdateInput, string>
+  | { name: 'quantity', alias?: string  } 
+  | { name: 'item', alias?: string  } 
+  | { name: 'user', alias?: string  } 
+  
+export interface ItemUpdateOneInput {
+  create?: ItemCreateInput | null
+  update?: ItemUpdateDataInput | null
+  upsert?: ItemUpsertNestedInput | null
+  delete?: boolean | null
+  disconnect?: boolean | null
+  connect?: ItemWhereUniqueInput | null
+}
+export type ItemUpdateOneInputInputObject =
+  | Extract<keyof ItemUpdateOneInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface ItemUpdateDataInput {
+  title?: string | null
+  description?: string | null
+  image?: string | null
+  largeImage?: string | null
+  price?: number | null
+  user?: UserUpdateOneRequiredInput | null
+}
+export type ItemUpdateDataInputInputObject =
+  | Extract<keyof ItemUpdateDataInput, string>
+  | { name: 'title', alias?: string  } 
+  | { name: 'description', alias?: string  } 
+  | { name: 'image', alias?: string  } 
+  | { name: 'largeImage', alias?: string  } 
+  | { name: 'price', alias?: string  } 
+  | { name: 'user', alias?: string  } 
+  
+export interface ItemUpsertNestedInput {
+  update?: ItemUpdateDataInput
+  create?: ItemCreateInput
+}
+export type ItemUpsertNestedInputInputObject =
+  | Extract<keyof ItemUpsertNestedInput, string>
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface CartItemUpdateManyMutationInput {
+  quantity?: number | null
+}
+export type CartItemUpdateManyMutationInputInputObject =
+  | Extract<keyof CartItemUpdateManyMutationInput, string>
+  | { name: 'quantity', alias?: string  } 
   
 export interface UserSubscriptionWhereInput {
   mutation_in?: prisma.MutationType[]
@@ -746,12 +2398,90 @@ export type UserSubscriptionWhereInputInputObject =
   | { name: 'OR', alias?: string  } 
   | { name: 'NOT', alias?: string  } 
   
+export interface ItemSubscriptionWhereInput {
+  mutation_in?: prisma.MutationType[]
+  updatedFields_contains?: string | null
+  updatedFields_contains_every?: string[]
+  updatedFields_contains_some?: string[]
+  node?: ItemWhereInput | null
+  AND?: ItemSubscriptionWhereInput[]
+  OR?: ItemSubscriptionWhereInput[]
+  NOT?: ItemSubscriptionWhereInput[]
+}
+export type ItemSubscriptionWhereInputInputObject =
+  | Extract<keyof ItemSubscriptionWhereInput, string>
+  | { name: 'mutation_in', alias?: string  } 
+  | { name: 'updatedFields_contains', alias?: string  } 
+  | { name: 'updatedFields_contains_every', alias?: string  } 
+  | { name: 'updatedFields_contains_some', alias?: string  } 
+  | { name: 'node', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
+export interface CartItemSubscriptionWhereInput {
+  mutation_in?: prisma.MutationType[]
+  updatedFields_contains?: string | null
+  updatedFields_contains_every?: string[]
+  updatedFields_contains_some?: string[]
+  node?: CartItemWhereInput | null
+  AND?: CartItemSubscriptionWhereInput[]
+  OR?: CartItemSubscriptionWhereInput[]
+  NOT?: CartItemSubscriptionWhereInput[]
+}
+export type CartItemSubscriptionWhereInputInputObject =
+  | Extract<keyof CartItemSubscriptionWhereInput, string>
+  | { name: 'mutation_in', alias?: string  } 
+  | { name: 'updatedFields_contains', alias?: string  } 
+  | { name: 'updatedFields_contains_every', alias?: string  } 
+  | { name: 'updatedFields_contains_some', alias?: string  } 
+  | { name: 'node', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
 
+export type PermissionValues =
+  | 'ADMIN'
+  | 'USER'
+  
 export type UserOrderByInputValues =
   | 'id_ASC'
   | 'id_DESC'
   | 'name_ASC'
   | 'name_DESC'
+  | 'email_ASC'
+  | 'email_DESC'
+  | 'password_ASC'
+  | 'password_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  
+export type ItemOrderByInputValues =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'title_ASC'
+  | 'title_DESC'
+  | 'description_ASC'
+  | 'description_DESC'
+  | 'image_ASC'
+  | 'image_DESC'
+  | 'largeImage_ASC'
+  | 'largeImage_DESC'
+  | 'price_ASC'
+  | 'price_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  
+export type CartItemOrderByInputValues =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'quantity_ASC'
+  | 'quantity_DESC'
   | 'createdAt_ASC'
   | 'createdAt_DESC'
   | 'updatedAt_ASC'

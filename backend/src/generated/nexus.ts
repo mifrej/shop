@@ -11,17 +11,245 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  CartItemCreateInput: { // input type
+    item?: NexusGenInputs['ItemCreateOneInput'] | null; // ItemCreateOneInput
+    quantity?: number | null; // Int
+    user: NexusGenInputs['UserCreateOneInput']; // UserCreateOneInput!
+  }
+  CartItemUpdateInput: { // input type
+    item?: NexusGenInputs['ItemUpdateOneInput'] | null; // ItemUpdateOneInput
+    quantity?: number | null; // Int
+    user?: NexusGenInputs['UserUpdateOneRequiredInput'] | null; // UserUpdateOneRequiredInput
+  }
+  CartItemUpdateManyMutationInput: { // input type
+    quantity?: number | null; // Int
+  }
+  CartItemWhereInput: { // input type
+    AND?: NexusGenInputs['CartItemWhereInput'][] | null; // [CartItemWhereInput!]
+    id?: string | null; // ID
+    id_contains?: string | null; // ID
+    id_ends_with?: string | null; // ID
+    id_gt?: string | null; // ID
+    id_gte?: string | null; // ID
+    id_in?: string[] | null; // [ID!]
+    id_lt?: string | null; // ID
+    id_lte?: string | null; // ID
+    id_not?: string | null; // ID
+    id_not_contains?: string | null; // ID
+    id_not_ends_with?: string | null; // ID
+    id_not_in?: string[] | null; // [ID!]
+    id_not_starts_with?: string | null; // ID
+    id_starts_with?: string | null; // ID
+    item?: NexusGenInputs['ItemWhereInput'] | null; // ItemWhereInput
+    NOT?: NexusGenInputs['CartItemWhereInput'][] | null; // [CartItemWhereInput!]
+    OR?: NexusGenInputs['CartItemWhereInput'][] | null; // [CartItemWhereInput!]
+    quantity?: number | null; // Int
+    quantity_gt?: number | null; // Int
+    quantity_gte?: number | null; // Int
+    quantity_in?: number[] | null; // [Int!]
+    quantity_lt?: number | null; // Int
+    quantity_lte?: number | null; // Int
+    quantity_not?: number | null; // Int
+    quantity_not_in?: number[] | null; // [Int!]
+    user?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+  }
+  CartItemWhereUniqueInput: { // input type
+    id?: string | null; // ID
+  }
+  ItemCreateInput: { // input type
+    description: string; // String!
+    image?: string | null; // String
+    largeImage?: string | null; // String
+    price: number; // Int!
+    title: string; // String!
+    user: NexusGenInputs['UserCreateOneInput']; // UserCreateOneInput!
+  }
+  ItemCreateOneInput: { // input type
+    connect?: NexusGenInputs['ItemWhereUniqueInput'] | null; // ItemWhereUniqueInput
+    create?: NexusGenInputs['ItemCreateInput'] | null; // ItemCreateInput
+  }
+  ItemUpdateDataInput: { // input type
+    description?: string | null; // String
+    image?: string | null; // String
+    largeImage?: string | null; // String
+    price?: number | null; // Int
+    title?: string | null; // String
+    user?: NexusGenInputs['UserUpdateOneRequiredInput'] | null; // UserUpdateOneRequiredInput
+  }
+  ItemUpdateInput: { // input type
+    description?: string | null; // String
+    image?: string | null; // String
+    largeImage?: string | null; // String
+    price?: number | null; // Int
+    title?: string | null; // String
+    user?: NexusGenInputs['UserUpdateOneRequiredInput'] | null; // UserUpdateOneRequiredInput
+  }
+  ItemUpdateManyMutationInput: { // input type
+    description?: string | null; // String
+    image?: string | null; // String
+    largeImage?: string | null; // String
+    price?: number | null; // Int
+    title?: string | null; // String
+  }
+  ItemUpdateOneInput: { // input type
+    connect?: NexusGenInputs['ItemWhereUniqueInput'] | null; // ItemWhereUniqueInput
+    create?: NexusGenInputs['ItemCreateInput'] | null; // ItemCreateInput
+    delete?: boolean | null; // Boolean
+    disconnect?: boolean | null; // Boolean
+    update?: NexusGenInputs['ItemUpdateDataInput'] | null; // ItemUpdateDataInput
+    upsert?: NexusGenInputs['ItemUpsertNestedInput'] | null; // ItemUpsertNestedInput
+  }
+  ItemUpsertNestedInput: { // input type
+    create: NexusGenInputs['ItemCreateInput']; // ItemCreateInput!
+    update: NexusGenInputs['ItemUpdateDataInput']; // ItemUpdateDataInput!
+  }
+  ItemWhereInput: { // input type
+    AND?: NexusGenInputs['ItemWhereInput'][] | null; // [ItemWhereInput!]
+    description?: string | null; // String
+    description_contains?: string | null; // String
+    description_ends_with?: string | null; // String
+    description_gt?: string | null; // String
+    description_gte?: string | null; // String
+    description_in?: string[] | null; // [String!]
+    description_lt?: string | null; // String
+    description_lte?: string | null; // String
+    description_not?: string | null; // String
+    description_not_contains?: string | null; // String
+    description_not_ends_with?: string | null; // String
+    description_not_in?: string[] | null; // [String!]
+    description_not_starts_with?: string | null; // String
+    description_starts_with?: string | null; // String
+    id?: string | null; // ID
+    id_contains?: string | null; // ID
+    id_ends_with?: string | null; // ID
+    id_gt?: string | null; // ID
+    id_gte?: string | null; // ID
+    id_in?: string[] | null; // [ID!]
+    id_lt?: string | null; // ID
+    id_lte?: string | null; // ID
+    id_not?: string | null; // ID
+    id_not_contains?: string | null; // ID
+    id_not_ends_with?: string | null; // ID
+    id_not_in?: string[] | null; // [ID!]
+    id_not_starts_with?: string | null; // ID
+    id_starts_with?: string | null; // ID
+    image?: string | null; // String
+    image_contains?: string | null; // String
+    image_ends_with?: string | null; // String
+    image_gt?: string | null; // String
+    image_gte?: string | null; // String
+    image_in?: string[] | null; // [String!]
+    image_lt?: string | null; // String
+    image_lte?: string | null; // String
+    image_not?: string | null; // String
+    image_not_contains?: string | null; // String
+    image_not_ends_with?: string | null; // String
+    image_not_in?: string[] | null; // [String!]
+    image_not_starts_with?: string | null; // String
+    image_starts_with?: string | null; // String
+    largeImage?: string | null; // String
+    largeImage_contains?: string | null; // String
+    largeImage_ends_with?: string | null; // String
+    largeImage_gt?: string | null; // String
+    largeImage_gte?: string | null; // String
+    largeImage_in?: string[] | null; // [String!]
+    largeImage_lt?: string | null; // String
+    largeImage_lte?: string | null; // String
+    largeImage_not?: string | null; // String
+    largeImage_not_contains?: string | null; // String
+    largeImage_not_ends_with?: string | null; // String
+    largeImage_not_in?: string[] | null; // [String!]
+    largeImage_not_starts_with?: string | null; // String
+    largeImage_starts_with?: string | null; // String
+    NOT?: NexusGenInputs['ItemWhereInput'][] | null; // [ItemWhereInput!]
+    OR?: NexusGenInputs['ItemWhereInput'][] | null; // [ItemWhereInput!]
+    price?: number | null; // Int
+    price_gt?: number | null; // Int
+    price_gte?: number | null; // Int
+    price_in?: number[] | null; // [Int!]
+    price_lt?: number | null; // Int
+    price_lte?: number | null; // Int
+    price_not?: number | null; // Int
+    price_not_in?: number[] | null; // [Int!]
+    title?: string | null; // String
+    title_contains?: string | null; // String
+    title_ends_with?: string | null; // String
+    title_gt?: string | null; // String
+    title_gte?: string | null; // String
+    title_in?: string[] | null; // [String!]
+    title_lt?: string | null; // String
+    title_lte?: string | null; // String
+    title_not?: string | null; // String
+    title_not_contains?: string | null; // String
+    title_not_ends_with?: string | null; // String
+    title_not_in?: string[] | null; // [String!]
+    title_not_starts_with?: string | null; // String
+    title_starts_with?: string | null; // String
+    user?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+  }
+  ItemWhereUniqueInput: { // input type
+    id?: string | null; // ID
+  }
   UserCreateInput: { // input type
+    email: string; // String!
     name: string; // String!
+    password: string; // String!
+    permissions?: NexusGenInputs['UserCreatepermissionsInput'] | null; // UserCreatepermissionsInput
+  }
+  UserCreateOneInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    create?: NexusGenInputs['UserCreateInput'] | null; // UserCreateInput
+  }
+  UserCreatepermissionsInput: { // input type
+    set?: NexusGenEnums['Permission'][] | null; // [Permission!]
+  }
+  UserUpdateDataInput: { // input type
+    email?: string | null; // String
+    name?: string | null; // String
+    password?: string | null; // String
+    permissions?: NexusGenInputs['UserUpdatepermissionsInput'] | null; // UserUpdatepermissionsInput
   }
   UserUpdateInput: { // input type
+    email?: string | null; // String
     name?: string | null; // String
+    password?: string | null; // String
+    permissions?: NexusGenInputs['UserUpdatepermissionsInput'] | null; // UserUpdatepermissionsInput
   }
   UserUpdateManyMutationInput: { // input type
+    email?: string | null; // String
     name?: string | null; // String
+    password?: string | null; // String
+    permissions?: NexusGenInputs['UserUpdatepermissionsInput'] | null; // UserUpdatepermissionsInput
+  }
+  UserUpdateOneRequiredInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    create?: NexusGenInputs['UserCreateInput'] | null; // UserCreateInput
+    update?: NexusGenInputs['UserUpdateDataInput'] | null; // UserUpdateDataInput
+    upsert?: NexusGenInputs['UserUpsertNestedInput'] | null; // UserUpsertNestedInput
+  }
+  UserUpdatepermissionsInput: { // input type
+    set?: NexusGenEnums['Permission'][] | null; // [Permission!]
+  }
+  UserUpsertNestedInput: { // input type
+    create: NexusGenInputs['UserCreateInput']; // UserCreateInput!
+    update: NexusGenInputs['UserUpdateDataInput']; // UserUpdateDataInput!
   }
   UserWhereInput: { // input type
     AND?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
+    email?: string | null; // String
+    email_contains?: string | null; // String
+    email_ends_with?: string | null; // String
+    email_gt?: string | null; // String
+    email_gte?: string | null; // String
+    email_in?: string[] | null; // [String!]
+    email_lt?: string | null; // String
+    email_lte?: string | null; // String
+    email_not?: string | null; // String
+    email_not_contains?: string | null; // String
+    email_not_ends_with?: string | null; // String
+    email_not_in?: string[] | null; // [String!]
+    email_not_starts_with?: string | null; // String
+    email_starts_with?: string | null; // String
     id?: string | null; // ID
     id_contains?: string | null; // ID
     id_ends_with?: string | null; // ID
@@ -52,22 +280,74 @@ export interface NexusGenInputs {
     name_starts_with?: string | null; // String
     NOT?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
     OR?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
+    password?: string | null; // String
+    password_contains?: string | null; // String
+    password_ends_with?: string | null; // String
+    password_gt?: string | null; // String
+    password_gte?: string | null; // String
+    password_in?: string[] | null; // [String!]
+    password_lt?: string | null; // String
+    password_lte?: string | null; // String
+    password_not?: string | null; // String
+    password_not_contains?: string | null; // String
+    password_not_ends_with?: string | null; // String
+    password_not_in?: string[] | null; // [String!]
+    password_not_starts_with?: string | null; // String
+    password_starts_with?: string | null; // String
   }
   UserWhereUniqueInput: { // input type
+    email?: string | null; // String
     id?: string | null; // ID
   }
 }
 
 export interface NexusGenEnums {
-  UserOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "name_ASC" | "name_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
+  CartItemOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "quantity_ASC" | "quantity_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
+  ItemOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "description_ASC" | "description_DESC" | "id_ASC" | "id_DESC" | "image_ASC" | "image_DESC" | "largeImage_ASC" | "largeImage_DESC" | "price_ASC" | "price_DESC" | "title_ASC" | "title_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
+  Permission: "ADMIN" | "USER"
+  UserOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "email_ASC" | "email_DESC" | "id_ASC" | "id_DESC" | "name_ASC" | "name_DESC" | "password_ASC" | "password_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
 }
 
 export interface NexusGenRootTypes {
+  AggregateCartItem: { // root type
+    count: number; // Int!
+  }
+  AggregateItem: { // root type
+    count: number; // Int!
+  }
   AggregateUser: { // root type
     count: number; // Int!
   }
   BatchPayload: { // root type
     count: any; // Long!
+  }
+  CartItem: { // root type
+    id: string; // ID!
+    quantity: number; // Int!
+  }
+  CartItemConnection: { // root type
+    edges: NexusGenRootTypes['CartItemEdge'][]; // [CartItemEdge!]!
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+  }
+  CartItemEdge: { // root type
+    cursor: string; // String!
+    node: NexusGenRootTypes['CartItem']; // CartItem!
+  }
+  Item: { // root type
+    description: string; // String!
+    id: string; // ID!
+    image?: string | null; // String
+    largeImage?: string | null; // String
+    price: number; // Int!
+    title: string; // String!
+  }
+  ItemConnection: { // root type
+    edges: NexusGenRootTypes['ItemEdge'][]; // [ItemEdge!]!
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+  }
+  ItemEdge: { // root type
+    cursor: string; // String!
+    node: NexusGenRootTypes['Item']; // Item!
   }
   Mutation: {};
   PageInfo: { // root type
@@ -78,8 +358,10 @@ export interface NexusGenRootTypes {
   }
   Query: {};
   User: { // root type
+    email: string; // String!
     id: string; // ID!
     name: string; // String!
+    password: string; // String!
   }
   UserConnection: { // root type
     edges: NexusGenRootTypes['UserEdge'][]; // [UserEdge!]!
@@ -98,27 +380,101 @@ export interface NexusGenRootTypes {
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
+  CartItemCreateInput: NexusGenInputs['CartItemCreateInput'];
+  CartItemUpdateInput: NexusGenInputs['CartItemUpdateInput'];
+  CartItemUpdateManyMutationInput: NexusGenInputs['CartItemUpdateManyMutationInput'];
+  CartItemWhereInput: NexusGenInputs['CartItemWhereInput'];
+  CartItemWhereUniqueInput: NexusGenInputs['CartItemWhereUniqueInput'];
+  ItemCreateInput: NexusGenInputs['ItemCreateInput'];
+  ItemCreateOneInput: NexusGenInputs['ItemCreateOneInput'];
+  ItemUpdateDataInput: NexusGenInputs['ItemUpdateDataInput'];
+  ItemUpdateInput: NexusGenInputs['ItemUpdateInput'];
+  ItemUpdateManyMutationInput: NexusGenInputs['ItemUpdateManyMutationInput'];
+  ItemUpdateOneInput: NexusGenInputs['ItemUpdateOneInput'];
+  ItemUpsertNestedInput: NexusGenInputs['ItemUpsertNestedInput'];
+  ItemWhereInput: NexusGenInputs['ItemWhereInput'];
+  ItemWhereUniqueInput: NexusGenInputs['ItemWhereUniqueInput'];
   UserCreateInput: NexusGenInputs['UserCreateInput'];
+  UserCreateOneInput: NexusGenInputs['UserCreateOneInput'];
+  UserCreatepermissionsInput: NexusGenInputs['UserCreatepermissionsInput'];
+  UserUpdateDataInput: NexusGenInputs['UserUpdateDataInput'];
   UserUpdateInput: NexusGenInputs['UserUpdateInput'];
   UserUpdateManyMutationInput: NexusGenInputs['UserUpdateManyMutationInput'];
+  UserUpdateOneRequiredInput: NexusGenInputs['UserUpdateOneRequiredInput'];
+  UserUpdatepermissionsInput: NexusGenInputs['UserUpdatepermissionsInput'];
+  UserUpsertNestedInput: NexusGenInputs['UserUpsertNestedInput'];
   UserWhereInput: NexusGenInputs['UserWhereInput'];
   UserWhereUniqueInput: NexusGenInputs['UserWhereUniqueInput'];
+  CartItemOrderByInput: NexusGenEnums['CartItemOrderByInput'];
+  ItemOrderByInput: NexusGenEnums['ItemOrderByInput'];
+  Permission: NexusGenEnums['Permission'];
   UserOrderByInput: NexusGenEnums['UserOrderByInput'];
 }
 
 export interface NexusGenFieldTypes {
+  AggregateCartItem: { // field return type
+    count: number; // Int!
+  }
+  AggregateItem: { // field return type
+    count: number; // Int!
+  }
   AggregateUser: { // field return type
     count: number; // Int!
   }
   BatchPayload: { // field return type
     count: any; // Long!
   }
+  CartItem: { // field return type
+    id: string; // ID!
+    item: NexusGenRootTypes['Item'] | null; // Item
+    quantity: number; // Int!
+    user: NexusGenRootTypes['User']; // User!
+  }
+  CartItemConnection: { // field return type
+    aggregate: NexusGenRootTypes['AggregateCartItem']; // AggregateCartItem!
+    edges: NexusGenRootTypes['CartItemEdge'][]; // [CartItemEdge!]!
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+  }
+  CartItemEdge: { // field return type
+    cursor: string; // String!
+    node: NexusGenRootTypes['CartItem']; // CartItem!
+  }
+  Item: { // field return type
+    description: string; // String!
+    id: string; // ID!
+    image: string | null; // String
+    largeImage: string | null; // String
+    price: number; // Int!
+    title: string; // String!
+    user: NexusGenRootTypes['User']; // User!
+  }
+  ItemConnection: { // field return type
+    aggregate: NexusGenRootTypes['AggregateItem']; // AggregateItem!
+    edges: NexusGenRootTypes['ItemEdge'][]; // [ItemEdge!]!
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+  }
+  ItemEdge: { // field return type
+    cursor: string; // String!
+    node: NexusGenRootTypes['Item']; // Item!
+  }
   Mutation: { // field return type
+    createCartItem: NexusGenRootTypes['CartItem']; // CartItem!
+    createItem: NexusGenRootTypes['Item']; // Item!
     createUser: NexusGenRootTypes['User']; // User!
+    deleteCartItem: NexusGenRootTypes['CartItem'] | null; // CartItem
+    deleteItem: NexusGenRootTypes['Item'] | null; // Item
+    deleteManyCartItems: NexusGenRootTypes['BatchPayload']; // BatchPayload!
+    deleteManyItems: NexusGenRootTypes['BatchPayload']; // BatchPayload!
     deleteManyUsers: NexusGenRootTypes['BatchPayload']; // BatchPayload!
     deleteUser: NexusGenRootTypes['User'] | null; // User
+    updateCartItem: NexusGenRootTypes['CartItem'] | null; // CartItem
+    updateItem: NexusGenRootTypes['Item'] | null; // Item
+    updateManyCartItems: NexusGenRootTypes['BatchPayload']; // BatchPayload!
+    updateManyItems: NexusGenRootTypes['BatchPayload']; // BatchPayload!
     updateManyUsers: NexusGenRootTypes['BatchPayload']; // BatchPayload!
     updateUser: NexusGenRootTypes['User'] | null; // User
+    upsertCartItem: NexusGenRootTypes['CartItem']; // CartItem!
+    upsertItem: NexusGenRootTypes['Item']; // Item!
     upsertUser: NexusGenRootTypes['User']; // User!
   }
   PageInfo: { // field return type
@@ -128,13 +484,22 @@ export interface NexusGenFieldTypes {
     startCursor: string | null; // String
   }
   Query: { // field return type
+    cartItem: NexusGenRootTypes['CartItem'] | null; // CartItem
+    cartItems: NexusGenRootTypes['CartItem'][]; // [CartItem!]!
+    cartItemsConnection: NexusGenRootTypes['CartItemConnection']; // CartItemConnection!
+    item: NexusGenRootTypes['Item'] | null; // Item
+    items: NexusGenRootTypes['Item'][]; // [Item!]!
+    itemsConnection: NexusGenRootTypes['ItemConnection']; // ItemConnection!
     user: NexusGenRootTypes['User'] | null; // User
     users: NexusGenRootTypes['User'][]; // [User!]!
     usersConnection: NexusGenRootTypes['UserConnection']; // UserConnection!
   }
   User: { // field return type
+    email: string; // String!
     id: string; // ID!
     name: string; // String!
+    password: string; // String!
+    permissions: NexusGenEnums['Permission'][]; // [Permission!]!
   }
   UserConnection: { // field return type
     aggregate: NexusGenRootTypes['AggregateUser']; // AggregateUser!
@@ -149,14 +514,48 @@ export interface NexusGenFieldTypes {
 
 export interface NexusGenArgTypes {
   Mutation: {
+    createCartItem: { // args
+      data: NexusGenInputs['CartItemCreateInput']; // CartItemCreateInput!
+    }
+    createItem: { // args
+      data: NexusGenInputs['ItemCreateInput']; // ItemCreateInput!
+    }
     createUser: { // args
       data: NexusGenInputs['UserCreateInput']; // UserCreateInput!
+    }
+    deleteCartItem: { // args
+      where: NexusGenInputs['CartItemWhereUniqueInput']; // CartItemWhereUniqueInput!
+    }
+    deleteItem: { // args
+      where: NexusGenInputs['ItemWhereUniqueInput']; // ItemWhereUniqueInput!
+    }
+    deleteManyCartItems: { // args
+      where?: NexusGenInputs['CartItemWhereInput'] | null; // CartItemWhereInput
+    }
+    deleteManyItems: { // args
+      where?: NexusGenInputs['ItemWhereInput'] | null; // ItemWhereInput
     }
     deleteManyUsers: { // args
       where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     }
     deleteUser: { // args
       where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
+    }
+    updateCartItem: { // args
+      data: NexusGenInputs['CartItemUpdateInput']; // CartItemUpdateInput!
+      where: NexusGenInputs['CartItemWhereUniqueInput']; // CartItemWhereUniqueInput!
+    }
+    updateItem: { // args
+      data: NexusGenInputs['ItemUpdateInput']; // ItemUpdateInput!
+      where: NexusGenInputs['ItemWhereUniqueInput']; // ItemWhereUniqueInput!
+    }
+    updateManyCartItems: { // args
+      data: NexusGenInputs['CartItemUpdateManyMutationInput']; // CartItemUpdateManyMutationInput!
+      where?: NexusGenInputs['CartItemWhereInput'] | null; // CartItemWhereInput
+    }
+    updateManyItems: { // args
+      data: NexusGenInputs['ItemUpdateManyMutationInput']; // ItemUpdateManyMutationInput!
+      where?: NexusGenInputs['ItemWhereInput'] | null; // ItemWhereInput
     }
     updateManyUsers: { // args
       data: NexusGenInputs['UserUpdateManyMutationInput']; // UserUpdateManyMutationInput!
@@ -166,6 +565,16 @@ export interface NexusGenArgTypes {
       data: NexusGenInputs['UserUpdateInput']; // UserUpdateInput!
       where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
     }
+    upsertCartItem: { // args
+      create: NexusGenInputs['CartItemCreateInput']; // CartItemCreateInput!
+      update: NexusGenInputs['CartItemUpdateInput']; // CartItemUpdateInput!
+      where: NexusGenInputs['CartItemWhereUniqueInput']; // CartItemWhereUniqueInput!
+    }
+    upsertItem: { // args
+      create: NexusGenInputs['ItemCreateInput']; // ItemCreateInput!
+      update: NexusGenInputs['ItemUpdateInput']; // ItemUpdateInput!
+      where: NexusGenInputs['ItemWhereUniqueInput']; // ItemWhereUniqueInput!
+    }
     upsertUser: { // args
       create: NexusGenInputs['UserCreateInput']; // UserCreateInput!
       update: NexusGenInputs['UserUpdateInput']; // UserUpdateInput!
@@ -173,6 +582,48 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    cartItem: { // args
+      where: NexusGenInputs['CartItemWhereUniqueInput']; // CartItemWhereUniqueInput!
+    }
+    cartItems: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['CartItemOrderByInput'] | null; // CartItemOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['CartItemWhereInput'] | null; // CartItemWhereInput
+    }
+    cartItemsConnection: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['CartItemOrderByInput'] | null; // CartItemOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['CartItemWhereInput'] | null; // CartItemWhereInput
+    }
+    item: { // args
+      where: NexusGenInputs['ItemWhereUniqueInput']; // ItemWhereUniqueInput!
+    }
+    items: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['ItemOrderByInput'] | null; // ItemOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['ItemWhereInput'] | null; // ItemWhereInput
+    }
+    itemsConnection: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['ItemOrderByInput'] | null; // ItemOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['ItemWhereInput'] | null; // ItemWhereInput
+    }
     user: { // args
       where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
     }
@@ -202,11 +653,11 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "AggregateUser" | "BatchPayload" | "Mutation" | "PageInfo" | "Query" | "User" | "UserConnection" | "UserEdge";
+export type NexusGenObjectNames = "AggregateCartItem" | "AggregateItem" | "AggregateUser" | "BatchPayload" | "CartItem" | "CartItemConnection" | "CartItemEdge" | "Item" | "ItemConnection" | "ItemEdge" | "Mutation" | "PageInfo" | "Query" | "User" | "UserConnection" | "UserEdge";
 
-export type NexusGenInputNames = "UserCreateInput" | "UserUpdateInput" | "UserUpdateManyMutationInput" | "UserWhereInput" | "UserWhereUniqueInput";
+export type NexusGenInputNames = "CartItemCreateInput" | "CartItemUpdateInput" | "CartItemUpdateManyMutationInput" | "CartItemWhereInput" | "CartItemWhereUniqueInput" | "ItemCreateInput" | "ItemCreateOneInput" | "ItemUpdateDataInput" | "ItemUpdateInput" | "ItemUpdateManyMutationInput" | "ItemUpdateOneInput" | "ItemUpsertNestedInput" | "ItemWhereInput" | "ItemWhereUniqueInput" | "UserCreateInput" | "UserCreateOneInput" | "UserCreatepermissionsInput" | "UserUpdateDataInput" | "UserUpdateInput" | "UserUpdateManyMutationInput" | "UserUpdateOneRequiredInput" | "UserUpdatepermissionsInput" | "UserUpsertNestedInput" | "UserWhereInput" | "UserWhereUniqueInput";
 
-export type NexusGenEnumNames = "UserOrderByInput";
+export type NexusGenEnumNames = "CartItemOrderByInput" | "ItemOrderByInput" | "Permission" | "UserOrderByInput";
 
 export type NexusGenInterfaceNames = never;
 

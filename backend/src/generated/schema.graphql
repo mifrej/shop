@@ -2,6 +2,14 @@
 ### Do not make changes to this file directly
 
 
+type AggregateCartItem {
+  count: Int!
+}
+
+type AggregateItem {
+  count: Int!
+}
+
 type AggregateUser {
   count: Int!
 }
@@ -10,14 +18,288 @@ type BatchPayload {
   count: Long!
 }
 
+type CartItem {
+  id: ID!
+  item: Item
+  quantity: Int!
+  user: User!
+}
+
+type CartItemConnection {
+  aggregate: AggregateCartItem!
+  edges: [CartItemEdge!]!
+  pageInfo: PageInfo!
+}
+
+input CartItemCreateInput {
+  item: ItemCreateOneInput
+  quantity: Int
+  user: UserCreateOneInput!
+}
+
+type CartItemEdge {
+  cursor: String!
+  node: CartItem!
+}
+
+enum CartItemOrderByInput {
+  createdAt_ASC
+  createdAt_DESC
+  id_ASC
+  id_DESC
+  quantity_ASC
+  quantity_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+input CartItemUpdateInput {
+  item: ItemUpdateOneInput
+  quantity: Int
+  user: UserUpdateOneRequiredInput
+}
+
+input CartItemUpdateManyMutationInput {
+  quantity: Int
+}
+
+input CartItemWhereInput {
+  AND: [CartItemWhereInput!]
+  id: ID
+  id_contains: ID
+  id_ends_with: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_not: ID
+  id_not_contains: ID
+  id_not_ends_with: ID
+  id_not_in: [ID!]
+  id_not_starts_with: ID
+  id_starts_with: ID
+  item: ItemWhereInput
+  NOT: [CartItemWhereInput!]
+  OR: [CartItemWhereInput!]
+  quantity: Int
+  quantity_gt: Int
+  quantity_gte: Int
+  quantity_in: [Int!]
+  quantity_lt: Int
+  quantity_lte: Int
+  quantity_not: Int
+  quantity_not_in: [Int!]
+  user: UserWhereInput
+}
+
+input CartItemWhereUniqueInput {
+  id: ID
+}
+
+type Item {
+  description: String!
+  id: ID!
+  image: String
+  largeImage: String
+  price: Int!
+  title: String!
+  user: User!
+}
+
+type ItemConnection {
+  aggregate: AggregateItem!
+  edges: [ItemEdge!]!
+  pageInfo: PageInfo!
+}
+
+input ItemCreateInput {
+  description: String!
+  image: String
+  largeImage: String
+  price: Int!
+  title: String!
+  user: UserCreateOneInput!
+}
+
+input ItemCreateOneInput {
+  connect: ItemWhereUniqueInput
+  create: ItemCreateInput
+}
+
+type ItemEdge {
+  cursor: String!
+  node: Item!
+}
+
+enum ItemOrderByInput {
+  createdAt_ASC
+  createdAt_DESC
+  description_ASC
+  description_DESC
+  id_ASC
+  id_DESC
+  image_ASC
+  image_DESC
+  largeImage_ASC
+  largeImage_DESC
+  price_ASC
+  price_DESC
+  title_ASC
+  title_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+input ItemUpdateDataInput {
+  description: String
+  image: String
+  largeImage: String
+  price: Int
+  title: String
+  user: UserUpdateOneRequiredInput
+}
+
+input ItemUpdateInput {
+  description: String
+  image: String
+  largeImage: String
+  price: Int
+  title: String
+  user: UserUpdateOneRequiredInput
+}
+
+input ItemUpdateManyMutationInput {
+  description: String
+  image: String
+  largeImage: String
+  price: Int
+  title: String
+}
+
+input ItemUpdateOneInput {
+  connect: ItemWhereUniqueInput
+  create: ItemCreateInput
+  delete: Boolean
+  disconnect: Boolean
+  update: ItemUpdateDataInput
+  upsert: ItemUpsertNestedInput
+}
+
+input ItemUpsertNestedInput {
+  create: ItemCreateInput!
+  update: ItemUpdateDataInput!
+}
+
+input ItemWhereInput {
+  AND: [ItemWhereInput!]
+  description: String
+  description_contains: String
+  description_ends_with: String
+  description_gt: String
+  description_gte: String
+  description_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_not: String
+  description_not_contains: String
+  description_not_ends_with: String
+  description_not_in: [String!]
+  description_not_starts_with: String
+  description_starts_with: String
+  id: ID
+  id_contains: ID
+  id_ends_with: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_not: ID
+  id_not_contains: ID
+  id_not_ends_with: ID
+  id_not_in: [ID!]
+  id_not_starts_with: ID
+  id_starts_with: ID
+  image: String
+  image_contains: String
+  image_ends_with: String
+  image_gt: String
+  image_gte: String
+  image_in: [String!]
+  image_lt: String
+  image_lte: String
+  image_not: String
+  image_not_contains: String
+  image_not_ends_with: String
+  image_not_in: [String!]
+  image_not_starts_with: String
+  image_starts_with: String
+  largeImage: String
+  largeImage_contains: String
+  largeImage_ends_with: String
+  largeImage_gt: String
+  largeImage_gte: String
+  largeImage_in: [String!]
+  largeImage_lt: String
+  largeImage_lte: String
+  largeImage_not: String
+  largeImage_not_contains: String
+  largeImage_not_ends_with: String
+  largeImage_not_in: [String!]
+  largeImage_not_starts_with: String
+  largeImage_starts_with: String
+  NOT: [ItemWhereInput!]
+  OR: [ItemWhereInput!]
+  price: Int
+  price_gt: Int
+  price_gte: Int
+  price_in: [Int!]
+  price_lt: Int
+  price_lte: Int
+  price_not: Int
+  price_not_in: [Int!]
+  title: String
+  title_contains: String
+  title_ends_with: String
+  title_gt: String
+  title_gte: String
+  title_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_not: String
+  title_not_contains: String
+  title_not_ends_with: String
+  title_not_in: [String!]
+  title_not_starts_with: String
+  title_starts_with: String
+  user: UserWhereInput
+}
+
+input ItemWhereUniqueInput {
+  id: ID
+}
+
 scalar Long
 
 type Mutation {
+  createCartItem(data: CartItemCreateInput!): CartItem!
+  createItem(data: ItemCreateInput!): Item!
   createUser(data: UserCreateInput!): User!
+  deleteCartItem(where: CartItemWhereUniqueInput!): CartItem
+  deleteItem(where: ItemWhereUniqueInput!): Item
+  deleteManyCartItems(where: CartItemWhereInput): BatchPayload!
+  deleteManyItems(where: ItemWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteUser(where: UserWhereUniqueInput!): User
+  updateCartItem(data: CartItemUpdateInput!, where: CartItemWhereUniqueInput!): CartItem
+  updateItem(data: ItemUpdateInput!, where: ItemWhereUniqueInput!): Item
+  updateManyCartItems(data: CartItemUpdateManyMutationInput!, where: CartItemWhereInput): BatchPayload!
+  updateManyItems(data: ItemUpdateManyMutationInput!, where: ItemWhereInput): BatchPayload!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  upsertCartItem(create: CartItemCreateInput!, update: CartItemUpdateInput!, where: CartItemWhereUniqueInput!): CartItem!
+  upsertItem(create: ItemCreateInput!, update: ItemUpdateInput!, where: ItemWhereUniqueInput!): Item!
   upsertUser(create: UserCreateInput!, update: UserUpdateInput!, where: UserWhereUniqueInput!): User!
 }
 
@@ -28,15 +310,29 @@ type PageInfo {
   startCursor: String
 }
 
+enum Permission {
+  ADMIN
+  USER
+}
+
 type Query {
+  cartItem(where: CartItemWhereUniqueInput!): CartItem
+  cartItems(after: String, before: String, first: Int, last: Int, orderBy: CartItemOrderByInput, skip: Int, where: CartItemWhereInput): [CartItem!]!
+  cartItemsConnection(after: String, before: String, first: Int, last: Int, orderBy: CartItemOrderByInput, skip: Int, where: CartItemWhereInput): CartItemConnection!
+  item(where: ItemWhereUniqueInput!): Item
+  items(after: String, before: String, first: Int, last: Int, orderBy: ItemOrderByInput, skip: Int, where: ItemWhereInput): [Item!]!
+  itemsConnection(after: String, before: String, first: Int, last: Int, orderBy: ItemOrderByInput, skip: Int, where: ItemWhereInput): ItemConnection!
   user(where: UserWhereUniqueInput!): User
   users(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]!
   usersConnection(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): UserConnection!
 }
 
 type User {
+  email: String!
   id: ID!
   name: String!
+  password: String!
+  permissions: [Permission!]!
 }
 
 type UserConnection {
@@ -46,7 +342,19 @@ type UserConnection {
 }
 
 input UserCreateInput {
+  email: String!
   name: String!
+  password: String!
+  permissions: UserCreatepermissionsInput
+}
+
+input UserCreateOneInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateInput
+}
+
+input UserCreatepermissionsInput {
+  set: [Permission!]
 }
 
 type UserEdge {
@@ -57,24 +365,71 @@ type UserEdge {
 enum UserOrderByInput {
   createdAt_ASC
   createdAt_DESC
+  email_ASC
+  email_DESC
   id_ASC
   id_DESC
   name_ASC
   name_DESC
+  password_ASC
+  password_DESC
   updatedAt_ASC
   updatedAt_DESC
 }
 
-input UserUpdateInput {
+input UserUpdateDataInput {
+  email: String
   name: String
+  password: String
+  permissions: UserUpdatepermissionsInput
+}
+
+input UserUpdateInput {
+  email: String
+  name: String
+  password: String
+  permissions: UserUpdatepermissionsInput
 }
 
 input UserUpdateManyMutationInput {
+  email: String
   name: String
+  password: String
+  permissions: UserUpdatepermissionsInput
+}
+
+input UserUpdateOneRequiredInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateInput
+  update: UserUpdateDataInput
+  upsert: UserUpsertNestedInput
+}
+
+input UserUpdatepermissionsInput {
+  set: [Permission!]
+}
+
+input UserUpsertNestedInput {
+  create: UserCreateInput!
+  update: UserUpdateDataInput!
 }
 
 input UserWhereInput {
   AND: [UserWhereInput!]
+  email: String
+  email_contains: String
+  email_ends_with: String
+  email_gt: String
+  email_gte: String
+  email_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_not: String
+  email_not_contains: String
+  email_not_ends_with: String
+  email_not_in: [String!]
+  email_not_starts_with: String
+  email_starts_with: String
   id: ID
   id_contains: ID
   id_ends_with: ID
@@ -105,8 +460,23 @@ input UserWhereInput {
   name_starts_with: String
   NOT: [UserWhereInput!]
   OR: [UserWhereInput!]
+  password: String
+  password_contains: String
+  password_ends_with: String
+  password_gt: String
+  password_gte: String
+  password_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_not: String
+  password_not_contains: String
+  password_not_ends_with: String
+  password_not_in: [String!]
+  password_not_starts_with: String
+  password_starts_with: String
 }
 
 input UserWhereUniqueInput {
+  email: String
   id: ID
 }

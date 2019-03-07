@@ -1,4 +1,29 @@
+enum Permission {
+  ADMIN
+  USER
+}
+
 type User {
   id: ID! @unique
   name: String!
+  email: String! @unique
+  password: String!
+  permissions: [Permission]
+}
+
+type Item {
+  id: ID! @unique
+  title: String!
+  description: String!
+  image: String
+  largeImage: String
+  price: Int!
+  user: User!
+}
+
+type CartItem {
+  id: ID! @unique
+  quantity: Int! @default(value: 1)
+  item: Item # relation to Item
+  user: User! # relation to User
 }
