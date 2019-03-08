@@ -2,44 +2,11 @@
 ### Do not make changes to this file directly
 
 
-type AggregateCartItem {
-  count: Int!
-}
-
-type AggregateItem {
-  count: Int!
-}
-
-type AggregateUser {
-  count: Int!
-}
-
-type BatchPayload {
-  count: Long!
-}
-
 type CartItem {
   id: ID!
   item: Item
   quantity: Int!
   user: User!
-}
-
-type CartItemConnection {
-  aggregate: AggregateCartItem!
-  edges: [CartItemEdge!]!
-  pageInfo: PageInfo!
-}
-
-input CartItemCreateInput {
-  item: ItemCreateOneInput
-  quantity: Int
-  user: UserCreateOneInput!
-}
-
-type CartItemEdge {
-  cursor: String!
-  node: CartItem!
 }
 
 enum CartItemOrderByInput {
@@ -51,16 +18,6 @@ enum CartItemOrderByInput {
   quantity_DESC
   updatedAt_ASC
   updatedAt_DESC
-}
-
-input CartItemUpdateInput {
-  item: ItemUpdateOneInput
-  quantity: Int
-  user: UserUpdateOneRequiredInput
-}
-
-input CartItemUpdateManyMutationInput {
-  quantity: Int
 }
 
 input CartItemWhereInput {
@@ -107,12 +64,6 @@ type Item {
   user: User!
 }
 
-type ItemConnection {
-  aggregate: AggregateItem!
-  edges: [ItemEdge!]!
-  pageInfo: PageInfo!
-}
-
 input ItemCreateInput {
   description: String!
   image: String
@@ -120,16 +71,6 @@ input ItemCreateInput {
   price: Int!
   title: String!
   user: UserCreateOneInput!
-}
-
-input ItemCreateOneInput {
-  connect: ItemWhereUniqueInput
-  create: ItemCreateInput
-}
-
-type ItemEdge {
-  cursor: String!
-  node: Item!
 }
 
 enum ItemOrderByInput {
@@ -149,46 +90,6 @@ enum ItemOrderByInput {
   title_DESC
   updatedAt_ASC
   updatedAt_DESC
-}
-
-input ItemUpdateDataInput {
-  description: String
-  image: String
-  largeImage: String
-  price: Int
-  title: String
-  user: UserUpdateOneRequiredInput
-}
-
-input ItemUpdateInput {
-  description: String
-  image: String
-  largeImage: String
-  price: Int
-  title: String
-  user: UserUpdateOneRequiredInput
-}
-
-input ItemUpdateManyMutationInput {
-  description: String
-  image: String
-  largeImage: String
-  price: Int
-  title: String
-}
-
-input ItemUpdateOneInput {
-  connect: ItemWhereUniqueInput
-  create: ItemCreateInput
-  delete: Boolean
-  disconnect: Boolean
-  update: ItemUpdateDataInput
-  upsert: ItemUpsertNestedInput
-}
-
-input ItemUpsertNestedInput {
-  create: ItemCreateInput!
-  update: ItemUpdateDataInput!
 }
 
 input ItemWhereInput {
@@ -280,34 +181,11 @@ input ItemWhereUniqueInput {
   id: ID
 }
 
-scalar Long
-
 type Mutation {
-  createCartItem(data: CartItemCreateInput!): CartItem!
   createItem(data: ItemCreateInput!): Item!
   createUser(data: UserCreateInput!): User!
-  deleteCartItem(where: CartItemWhereUniqueInput!): CartItem
   deleteItem(where: ItemWhereUniqueInput!): Item
-  deleteManyCartItems(where: CartItemWhereInput): BatchPayload!
-  deleteManyItems(where: ItemWhereInput): BatchPayload!
-  deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteUser(where: UserWhereUniqueInput!): User
-  updateCartItem(data: CartItemUpdateInput!, where: CartItemWhereUniqueInput!): CartItem
-  updateItem(data: ItemUpdateInput!, where: ItemWhereUniqueInput!): Item
-  updateManyCartItems(data: CartItemUpdateManyMutationInput!, where: CartItemWhereInput): BatchPayload!
-  updateManyItems(data: ItemUpdateManyMutationInput!, where: ItemWhereInput): BatchPayload!
-  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
-  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
-  upsertCartItem(create: CartItemCreateInput!, update: CartItemUpdateInput!, where: CartItemWhereUniqueInput!): CartItem!
-  upsertItem(create: ItemCreateInput!, update: ItemUpdateInput!, where: ItemWhereUniqueInput!): Item!
-  upsertUser(create: UserCreateInput!, update: UserUpdateInput!, where: UserWhereUniqueInput!): User!
-}
-
-type PageInfo {
-  endCursor: String
-  hasNextPage: Boolean!
-  hasPreviousPage: Boolean!
-  startCursor: String
 }
 
 enum Permission {
@@ -318,13 +196,10 @@ enum Permission {
 type Query {
   cartItem(where: CartItemWhereUniqueInput!): CartItem
   cartItems(after: String, before: String, first: Int, last: Int, orderBy: CartItemOrderByInput, skip: Int, where: CartItemWhereInput): [CartItem!]!
-  cartItemsConnection(after: String, before: String, first: Int, last: Int, orderBy: CartItemOrderByInput, skip: Int, where: CartItemWhereInput): CartItemConnection!
   item(where: ItemWhereUniqueInput!): Item
   items(after: String, before: String, first: Int, last: Int, orderBy: ItemOrderByInput, skip: Int, where: ItemWhereInput): [Item!]!
-  itemsConnection(after: String, before: String, first: Int, last: Int, orderBy: ItemOrderByInput, skip: Int, where: ItemWhereInput): ItemConnection!
   user(where: UserWhereUniqueInput!): User
   users(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]!
-  usersConnection(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): UserConnection!
 }
 
 type User {
@@ -333,12 +208,6 @@ type User {
   name: String!
   password: String!
   permissions: [Permission!]!
-}
-
-type UserConnection {
-  aggregate: AggregateUser!
-  edges: [UserEdge!]!
-  pageInfo: PageInfo!
 }
 
 input UserCreateInput {
@@ -357,11 +226,6 @@ input UserCreatepermissionsInput {
   set: [Permission!]
 }
 
-type UserEdge {
-  cursor: String!
-  node: User!
-}
-
 enum UserOrderByInput {
   createdAt_ASC
   createdAt_DESC
@@ -375,43 +239,6 @@ enum UserOrderByInput {
   password_DESC
   updatedAt_ASC
   updatedAt_DESC
-}
-
-input UserUpdateDataInput {
-  email: String
-  name: String
-  password: String
-  permissions: UserUpdatepermissionsInput
-}
-
-input UserUpdateInput {
-  email: String
-  name: String
-  password: String
-  permissions: UserUpdatepermissionsInput
-}
-
-input UserUpdateManyMutationInput {
-  email: String
-  name: String
-  password: String
-  permissions: UserUpdatepermissionsInput
-}
-
-input UserUpdateOneRequiredInput {
-  connect: UserWhereUniqueInput
-  create: UserCreateInput
-  update: UserUpdateDataInput
-  upsert: UserUpsertNestedInput
-}
-
-input UserUpdatepermissionsInput {
-  set: [Permission!]
-}
-
-input UserUpsertNestedInput {
-  create: UserCreateInput!
-  update: UserUpdateDataInput!
 }
 
 input UserWhereInput {

@@ -3,7 +3,7 @@
  * Do not make changes to this file directly
  */
 
-
+import * as types from "../types"
 
 
 declare global {
@@ -11,19 +11,6 @@ declare global {
 }
 
 export interface NexusGenInputs {
-  CartItemCreateInput: { // input type
-    item?: NexusGenInputs['ItemCreateOneInput'] | null; // ItemCreateOneInput
-    quantity?: number | null; // Int
-    user: NexusGenInputs['UserCreateOneInput']; // UserCreateOneInput!
-  }
-  CartItemUpdateInput: { // input type
-    item?: NexusGenInputs['ItemUpdateOneInput'] | null; // ItemUpdateOneInput
-    quantity?: number | null; // Int
-    user?: NexusGenInputs['UserUpdateOneRequiredInput'] | null; // UserUpdateOneRequiredInput
-  }
-  CartItemUpdateManyMutationInput: { // input type
-    quantity?: number | null; // Int
-  }
   CartItemWhereInput: { // input type
     AND?: NexusGenInputs['CartItemWhereInput'][] | null; // [CartItemWhereInput!]
     id?: string | null; // ID
@@ -63,45 +50,6 @@ export interface NexusGenInputs {
     price: number; // Int!
     title: string; // String!
     user: NexusGenInputs['UserCreateOneInput']; // UserCreateOneInput!
-  }
-  ItemCreateOneInput: { // input type
-    connect?: NexusGenInputs['ItemWhereUniqueInput'] | null; // ItemWhereUniqueInput
-    create?: NexusGenInputs['ItemCreateInput'] | null; // ItemCreateInput
-  }
-  ItemUpdateDataInput: { // input type
-    description?: string | null; // String
-    image?: string | null; // String
-    largeImage?: string | null; // String
-    price?: number | null; // Int
-    title?: string | null; // String
-    user?: NexusGenInputs['UserUpdateOneRequiredInput'] | null; // UserUpdateOneRequiredInput
-  }
-  ItemUpdateInput: { // input type
-    description?: string | null; // String
-    image?: string | null; // String
-    largeImage?: string | null; // String
-    price?: number | null; // Int
-    title?: string | null; // String
-    user?: NexusGenInputs['UserUpdateOneRequiredInput'] | null; // UserUpdateOneRequiredInput
-  }
-  ItemUpdateManyMutationInput: { // input type
-    description?: string | null; // String
-    image?: string | null; // String
-    largeImage?: string | null; // String
-    price?: number | null; // Int
-    title?: string | null; // String
-  }
-  ItemUpdateOneInput: { // input type
-    connect?: NexusGenInputs['ItemWhereUniqueInput'] | null; // ItemWhereUniqueInput
-    create?: NexusGenInputs['ItemCreateInput'] | null; // ItemCreateInput
-    delete?: boolean | null; // Boolean
-    disconnect?: boolean | null; // Boolean
-    update?: NexusGenInputs['ItemUpdateDataInput'] | null; // ItemUpdateDataInput
-    upsert?: NexusGenInputs['ItemUpsertNestedInput'] | null; // ItemUpsertNestedInput
-  }
-  ItemUpsertNestedInput: { // input type
-    create: NexusGenInputs['ItemCreateInput']; // ItemCreateInput!
-    update: NexusGenInputs['ItemUpdateDataInput']; // ItemUpdateDataInput!
   }
   ItemWhereInput: { // input type
     AND?: NexusGenInputs['ItemWhereInput'][] | null; // [ItemWhereInput!]
@@ -203,37 +151,6 @@ export interface NexusGenInputs {
   UserCreatepermissionsInput: { // input type
     set?: NexusGenEnums['Permission'][] | null; // [Permission!]
   }
-  UserUpdateDataInput: { // input type
-    email?: string | null; // String
-    name?: string | null; // String
-    password?: string | null; // String
-    permissions?: NexusGenInputs['UserUpdatepermissionsInput'] | null; // UserUpdatepermissionsInput
-  }
-  UserUpdateInput: { // input type
-    email?: string | null; // String
-    name?: string | null; // String
-    password?: string | null; // String
-    permissions?: NexusGenInputs['UserUpdatepermissionsInput'] | null; // UserUpdatepermissionsInput
-  }
-  UserUpdateManyMutationInput: { // input type
-    email?: string | null; // String
-    name?: string | null; // String
-    password?: string | null; // String
-    permissions?: NexusGenInputs['UserUpdatepermissionsInput'] | null; // UserUpdatepermissionsInput
-  }
-  UserUpdateOneRequiredInput: { // input type
-    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
-    create?: NexusGenInputs['UserCreateInput'] | null; // UserCreateInput
-    update?: NexusGenInputs['UserUpdateDataInput'] | null; // UserUpdateDataInput
-    upsert?: NexusGenInputs['UserUpsertNestedInput'] | null; // UserUpsertNestedInput
-  }
-  UserUpdatepermissionsInput: { // input type
-    set?: NexusGenEnums['Permission'][] | null; // [Permission!]
-  }
-  UserUpsertNestedInput: { // input type
-    create: NexusGenInputs['UserCreateInput']; // UserCreateInput!
-    update: NexusGenInputs['UserUpdateDataInput']; // UserUpdateDataInput!
-  }
   UserWhereInput: { // input type
     AND?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
     email?: string | null; // String
@@ -309,29 +226,9 @@ export interface NexusGenEnums {
 }
 
 export interface NexusGenRootTypes {
-  AggregateCartItem: { // root type
-    count: number; // Int!
-  }
-  AggregateItem: { // root type
-    count: number; // Int!
-  }
-  AggregateUser: { // root type
-    count: number; // Int!
-  }
-  BatchPayload: { // root type
-    count: any; // Long!
-  }
   CartItem: { // root type
     id: string; // ID!
     quantity: number; // Int!
-  }
-  CartItemConnection: { // root type
-    edges: NexusGenRootTypes['CartItemEdge'][]; // [CartItemEdge!]!
-    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
-  }
-  CartItemEdge: { // root type
-    cursor: string; // String!
-    node: NexusGenRootTypes['CartItem']; // CartItem!
   }
   Item: { // root type
     description: string; // String!
@@ -341,21 +238,7 @@ export interface NexusGenRootTypes {
     price: number; // Int!
     title: string; // String!
   }
-  ItemConnection: { // root type
-    edges: NexusGenRootTypes['ItemEdge'][]; // [ItemEdge!]!
-    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
-  }
-  ItemEdge: { // root type
-    cursor: string; // String!
-    node: NexusGenRootTypes['Item']; // Item!
-  }
   Mutation: {};
-  PageInfo: { // root type
-    endCursor?: string | null; // String
-    hasNextPage: boolean; // Boolean!
-    hasPreviousPage: boolean; // Boolean!
-    startCursor?: string | null; // String
-  }
   Query: {};
   User: { // root type
     email: string; // String!
@@ -363,46 +246,22 @@ export interface NexusGenRootTypes {
     name: string; // String!
     password: string; // String!
   }
-  UserConnection: { // root type
-    edges: NexusGenRootTypes['UserEdge'][]; // [UserEdge!]!
-    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
-  }
-  UserEdge: { // root type
-    cursor: string; // String!
-    node: NexusGenRootTypes['User']; // User!
-  }
   String: string;
   Int: number;
   Float: number;
   Boolean: boolean;
   ID: string;
-  Long: any;
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
-  CartItemCreateInput: NexusGenInputs['CartItemCreateInput'];
-  CartItemUpdateInput: NexusGenInputs['CartItemUpdateInput'];
-  CartItemUpdateManyMutationInput: NexusGenInputs['CartItemUpdateManyMutationInput'];
   CartItemWhereInput: NexusGenInputs['CartItemWhereInput'];
   CartItemWhereUniqueInput: NexusGenInputs['CartItemWhereUniqueInput'];
   ItemCreateInput: NexusGenInputs['ItemCreateInput'];
-  ItemCreateOneInput: NexusGenInputs['ItemCreateOneInput'];
-  ItemUpdateDataInput: NexusGenInputs['ItemUpdateDataInput'];
-  ItemUpdateInput: NexusGenInputs['ItemUpdateInput'];
-  ItemUpdateManyMutationInput: NexusGenInputs['ItemUpdateManyMutationInput'];
-  ItemUpdateOneInput: NexusGenInputs['ItemUpdateOneInput'];
-  ItemUpsertNestedInput: NexusGenInputs['ItemUpsertNestedInput'];
   ItemWhereInput: NexusGenInputs['ItemWhereInput'];
   ItemWhereUniqueInput: NexusGenInputs['ItemWhereUniqueInput'];
   UserCreateInput: NexusGenInputs['UserCreateInput'];
   UserCreateOneInput: NexusGenInputs['UserCreateOneInput'];
   UserCreatepermissionsInput: NexusGenInputs['UserCreatepermissionsInput'];
-  UserUpdateDataInput: NexusGenInputs['UserUpdateDataInput'];
-  UserUpdateInput: NexusGenInputs['UserUpdateInput'];
-  UserUpdateManyMutationInput: NexusGenInputs['UserUpdateManyMutationInput'];
-  UserUpdateOneRequiredInput: NexusGenInputs['UserUpdateOneRequiredInput'];
-  UserUpdatepermissionsInput: NexusGenInputs['UserUpdatepermissionsInput'];
-  UserUpsertNestedInput: NexusGenInputs['UserUpsertNestedInput'];
   UserWhereInput: NexusGenInputs['UserWhereInput'];
   UserWhereUniqueInput: NexusGenInputs['UserWhereUniqueInput'];
   CartItemOrderByInput: NexusGenEnums['CartItemOrderByInput'];
@@ -412,32 +271,11 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 }
 
 export interface NexusGenFieldTypes {
-  AggregateCartItem: { // field return type
-    count: number; // Int!
-  }
-  AggregateItem: { // field return type
-    count: number; // Int!
-  }
-  AggregateUser: { // field return type
-    count: number; // Int!
-  }
-  BatchPayload: { // field return type
-    count: any; // Long!
-  }
   CartItem: { // field return type
     id: string; // ID!
     item: NexusGenRootTypes['Item'] | null; // Item
     quantity: number; // Int!
     user: NexusGenRootTypes['User']; // User!
-  }
-  CartItemConnection: { // field return type
-    aggregate: NexusGenRootTypes['AggregateCartItem']; // AggregateCartItem!
-    edges: NexusGenRootTypes['CartItemEdge'][]; // [CartItemEdge!]!
-    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
-  }
-  CartItemEdge: { // field return type
-    cursor: string; // String!
-    node: NexusGenRootTypes['CartItem']; // CartItem!
   }
   Item: { // field return type
     description: string; // String!
@@ -448,51 +286,19 @@ export interface NexusGenFieldTypes {
     title: string; // String!
     user: NexusGenRootTypes['User']; // User!
   }
-  ItemConnection: { // field return type
-    aggregate: NexusGenRootTypes['AggregateItem']; // AggregateItem!
-    edges: NexusGenRootTypes['ItemEdge'][]; // [ItemEdge!]!
-    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
-  }
-  ItemEdge: { // field return type
-    cursor: string; // String!
-    node: NexusGenRootTypes['Item']; // Item!
-  }
   Mutation: { // field return type
-    createCartItem: NexusGenRootTypes['CartItem']; // CartItem!
     createItem: NexusGenRootTypes['Item']; // Item!
     createUser: NexusGenRootTypes['User']; // User!
-    deleteCartItem: NexusGenRootTypes['CartItem'] | null; // CartItem
     deleteItem: NexusGenRootTypes['Item'] | null; // Item
-    deleteManyCartItems: NexusGenRootTypes['BatchPayload']; // BatchPayload!
-    deleteManyItems: NexusGenRootTypes['BatchPayload']; // BatchPayload!
-    deleteManyUsers: NexusGenRootTypes['BatchPayload']; // BatchPayload!
     deleteUser: NexusGenRootTypes['User'] | null; // User
-    updateCartItem: NexusGenRootTypes['CartItem'] | null; // CartItem
-    updateItem: NexusGenRootTypes['Item'] | null; // Item
-    updateManyCartItems: NexusGenRootTypes['BatchPayload']; // BatchPayload!
-    updateManyItems: NexusGenRootTypes['BatchPayload']; // BatchPayload!
-    updateManyUsers: NexusGenRootTypes['BatchPayload']; // BatchPayload!
-    updateUser: NexusGenRootTypes['User'] | null; // User
-    upsertCartItem: NexusGenRootTypes['CartItem']; // CartItem!
-    upsertItem: NexusGenRootTypes['Item']; // Item!
-    upsertUser: NexusGenRootTypes['User']; // User!
-  }
-  PageInfo: { // field return type
-    endCursor: string | null; // String
-    hasNextPage: boolean; // Boolean!
-    hasPreviousPage: boolean; // Boolean!
-    startCursor: string | null; // String
   }
   Query: { // field return type
     cartItem: NexusGenRootTypes['CartItem'] | null; // CartItem
     cartItems: NexusGenRootTypes['CartItem'][]; // [CartItem!]!
-    cartItemsConnection: NexusGenRootTypes['CartItemConnection']; // CartItemConnection!
     item: NexusGenRootTypes['Item'] | null; // Item
     items: NexusGenRootTypes['Item'][]; // [Item!]!
-    itemsConnection: NexusGenRootTypes['ItemConnection']; // ItemConnection!
     user: NexusGenRootTypes['User'] | null; // User
     users: NexusGenRootTypes['User'][]; // [User!]!
-    usersConnection: NexusGenRootTypes['UserConnection']; // UserConnection!
   }
   User: { // field return type
     email: string; // String!
@@ -501,83 +307,20 @@ export interface NexusGenFieldTypes {
     password: string; // String!
     permissions: NexusGenEnums['Permission'][]; // [Permission!]!
   }
-  UserConnection: { // field return type
-    aggregate: NexusGenRootTypes['AggregateUser']; // AggregateUser!
-    edges: NexusGenRootTypes['UserEdge'][]; // [UserEdge!]!
-    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
-  }
-  UserEdge: { // field return type
-    cursor: string; // String!
-    node: NexusGenRootTypes['User']; // User!
-  }
 }
 
 export interface NexusGenArgTypes {
   Mutation: {
-    createCartItem: { // args
-      data: NexusGenInputs['CartItemCreateInput']; // CartItemCreateInput!
-    }
     createItem: { // args
       data: NexusGenInputs['ItemCreateInput']; // ItemCreateInput!
     }
     createUser: { // args
       data: NexusGenInputs['UserCreateInput']; // UserCreateInput!
     }
-    deleteCartItem: { // args
-      where: NexusGenInputs['CartItemWhereUniqueInput']; // CartItemWhereUniqueInput!
-    }
     deleteItem: { // args
       where: NexusGenInputs['ItemWhereUniqueInput']; // ItemWhereUniqueInput!
     }
-    deleteManyCartItems: { // args
-      where?: NexusGenInputs['CartItemWhereInput'] | null; // CartItemWhereInput
-    }
-    deleteManyItems: { // args
-      where?: NexusGenInputs['ItemWhereInput'] | null; // ItemWhereInput
-    }
-    deleteManyUsers: { // args
-      where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
-    }
     deleteUser: { // args
-      where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
-    }
-    updateCartItem: { // args
-      data: NexusGenInputs['CartItemUpdateInput']; // CartItemUpdateInput!
-      where: NexusGenInputs['CartItemWhereUniqueInput']; // CartItemWhereUniqueInput!
-    }
-    updateItem: { // args
-      data: NexusGenInputs['ItemUpdateInput']; // ItemUpdateInput!
-      where: NexusGenInputs['ItemWhereUniqueInput']; // ItemWhereUniqueInput!
-    }
-    updateManyCartItems: { // args
-      data: NexusGenInputs['CartItemUpdateManyMutationInput']; // CartItemUpdateManyMutationInput!
-      where?: NexusGenInputs['CartItemWhereInput'] | null; // CartItemWhereInput
-    }
-    updateManyItems: { // args
-      data: NexusGenInputs['ItemUpdateManyMutationInput']; // ItemUpdateManyMutationInput!
-      where?: NexusGenInputs['ItemWhereInput'] | null; // ItemWhereInput
-    }
-    updateManyUsers: { // args
-      data: NexusGenInputs['UserUpdateManyMutationInput']; // UserUpdateManyMutationInput!
-      where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
-    }
-    updateUser: { // args
-      data: NexusGenInputs['UserUpdateInput']; // UserUpdateInput!
-      where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
-    }
-    upsertCartItem: { // args
-      create: NexusGenInputs['CartItemCreateInput']; // CartItemCreateInput!
-      update: NexusGenInputs['CartItemUpdateInput']; // CartItemUpdateInput!
-      where: NexusGenInputs['CartItemWhereUniqueInput']; // CartItemWhereUniqueInput!
-    }
-    upsertItem: { // args
-      create: NexusGenInputs['ItemCreateInput']; // ItemCreateInput!
-      update: NexusGenInputs['ItemUpdateInput']; // ItemUpdateInput!
-      where: NexusGenInputs['ItemWhereUniqueInput']; // ItemWhereUniqueInput!
-    }
-    upsertUser: { // args
-      create: NexusGenInputs['UserCreateInput']; // UserCreateInput!
-      update: NexusGenInputs['UserUpdateInput']; // UserUpdateInput!
       where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
     }
   }
@@ -586,15 +329,6 @@ export interface NexusGenArgTypes {
       where: NexusGenInputs['CartItemWhereUniqueInput']; // CartItemWhereUniqueInput!
     }
     cartItems: { // args
-      after?: string | null; // String
-      before?: string | null; // String
-      first?: number | null; // Int
-      last?: number | null; // Int
-      orderBy?: NexusGenEnums['CartItemOrderByInput'] | null; // CartItemOrderByInput
-      skip?: number | null; // Int
-      where?: NexusGenInputs['CartItemWhereInput'] | null; // CartItemWhereInput
-    }
-    cartItemsConnection: { // args
       after?: string | null; // String
       before?: string | null; // String
       first?: number | null; // Int
@@ -615,28 +349,10 @@ export interface NexusGenArgTypes {
       skip?: number | null; // Int
       where?: NexusGenInputs['ItemWhereInput'] | null; // ItemWhereInput
     }
-    itemsConnection: { // args
-      after?: string | null; // String
-      before?: string | null; // String
-      first?: number | null; // Int
-      last?: number | null; // Int
-      orderBy?: NexusGenEnums['ItemOrderByInput'] | null; // ItemOrderByInput
-      skip?: number | null; // Int
-      where?: NexusGenInputs['ItemWhereInput'] | null; // ItemWhereInput
-    }
     user: { // args
       where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
     }
     users: { // args
-      after?: string | null; // String
-      before?: string | null; // String
-      first?: number | null; // Int
-      last?: number | null; // Int
-      orderBy?: NexusGenEnums['UserOrderByInput'] | null; // UserOrderByInput
-      skip?: number | null; // Int
-      where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
-    }
-    usersConnection: { // args
       after?: string | null; // String
       before?: string | null; // String
       first?: number | null; // Int
@@ -653,20 +369,20 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "AggregateCartItem" | "AggregateItem" | "AggregateUser" | "BatchPayload" | "CartItem" | "CartItemConnection" | "CartItemEdge" | "Item" | "ItemConnection" | "ItemEdge" | "Mutation" | "PageInfo" | "Query" | "User" | "UserConnection" | "UserEdge";
+export type NexusGenObjectNames = "CartItem" | "Item" | "Mutation" | "Query" | "User";
 
-export type NexusGenInputNames = "CartItemCreateInput" | "CartItemUpdateInput" | "CartItemUpdateManyMutationInput" | "CartItemWhereInput" | "CartItemWhereUniqueInput" | "ItemCreateInput" | "ItemCreateOneInput" | "ItemUpdateDataInput" | "ItemUpdateInput" | "ItemUpdateManyMutationInput" | "ItemUpdateOneInput" | "ItemUpsertNestedInput" | "ItemWhereInput" | "ItemWhereUniqueInput" | "UserCreateInput" | "UserCreateOneInput" | "UserCreatepermissionsInput" | "UserUpdateDataInput" | "UserUpdateInput" | "UserUpdateManyMutationInput" | "UserUpdateOneRequiredInput" | "UserUpdatepermissionsInput" | "UserUpsertNestedInput" | "UserWhereInput" | "UserWhereUniqueInput";
+export type NexusGenInputNames = "CartItemWhereInput" | "CartItemWhereUniqueInput" | "ItemCreateInput" | "ItemWhereInput" | "ItemWhereUniqueInput" | "UserCreateInput" | "UserCreateOneInput" | "UserCreatepermissionsInput" | "UserWhereInput" | "UserWhereUniqueInput";
 
 export type NexusGenEnumNames = "CartItemOrderByInput" | "ItemOrderByInput" | "Permission" | "UserOrderByInput";
 
 export type NexusGenInterfaceNames = never;
 
-export type NexusGenScalarNames = "Boolean" | "Float" | "ID" | "Int" | "Long" | "String";
+export type NexusGenScalarNames = "Boolean" | "Float" | "ID" | "Int" | "String";
 
 export type NexusGenUnionNames = never;
 
 export interface NexusGenTypes {
-  context: any;
+  context: types.Context;
   inputTypes: NexusGenInputs;
   rootTypes: NexusGenRootTypes;
   argTypes: NexusGenArgTypes;
