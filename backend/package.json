@@ -5,8 +5,10 @@
   "name": "shop-backend-js",
   "scripts": {
     "deploy": "prisma deploy",
-    "dev": "ts-node-dev --no-notify --respawn --transpileOnly ./src",
-    "start": "ts-node src/index.ts",
+    "start": "npm-run-all --parallel playground start:dev",
+    "playground": "graphql playground",
+    "start:dev": "ts-node-dev --no-notify --respawn --transpileOnly ./src",
+    "start:prod": "ts-node src/index.ts",
     "tslint": "tslint -c tslint.json '{prisma,src}/**/*.ts'",
     "ts:check": "tsc --noEmit"
   },
@@ -14,6 +16,7 @@
   "version": "1.0.0",
   "dependencies": {
     "graphql": "^14.1.1",
+    "graphql-tools": "^4.0.4",
     "graphql-yoga": "^1.17.4",
     "nexus": "^0.10.0",
     "nexus-prisma": "^0.3.4",
@@ -22,6 +25,7 @@
   "devDependencies": {
     "@types/graphql": "^14.0.7",
     "@types/node": "^11.10.4",
+    "npm-run-all": "^4.1.5",
     "prettier": "^1.16.4",
     "ts-node": "^8.0.2",
     "ts-node-dev": "^1.0.0-pre.32",
