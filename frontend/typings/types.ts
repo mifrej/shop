@@ -50,3 +50,7 @@ export interface ApolloContext<Q extends DefaultQuery = DefaultQuery>
   extends NextAppContext<Q> {
   ctx: AppContext<Q>;
 }
+export interface Theme {
+  color: string;
+  background: string;
+}

@@ -4,6 +4,7 @@
     "tslint:latest",
     "tslint-react",
     "tslint-config-airbnb",
+    "tslint-react-hooks",
     "tslint-config-prettier"
   ],
   "jsRules": {},
@@ -22,6 +23,7 @@
     "no-implicit-dependencies": false,
     "no-submodule-imports": [false],
     "prettier": [true],
+    "react-hooks-nesting": "error",
     "variable-name": [
       true,
       "ban-keywords",

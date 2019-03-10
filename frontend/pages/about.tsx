@@ -1,10 +1,5 @@
-import App from '../components/App';
-import Header from '../components/Header';
-
 export default () => (
-  <App>
-    <Header />
-    <article>
+  <article>
       <h1>The Idea Behind This Example</h1>
       <p>
         <a href="https://www.apollographql.com/client/">Apollo</a> is a GraphQL
@@ -39,5 +34,4 @@ export default () => (
         its GraphQL backend.
       </p>
     </article>
-  </App>
 );
