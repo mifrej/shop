@@ -1,7 +1,8 @@
 import { useTheme } from 'theming';
 import { Theme } from 'typings/types';
-import Header from '../../components/header/header';
-import './app.css';
+import Header from '../header/header';
+import Meta from '../meta/meta';
+import '../theme/variables.css';
 
 const Page: React.FunctionComponent<{ children: React.ReactNode }> = ({
   children,
@@ -9,44 +10,38 @@ const Page: React.FunctionComponent<{ children: React.ReactNode }> = ({
   const theme: Theme | object | null = useTheme();
   return (
     <main>
+      <Meta />
       <Header />
-      {children}
-      <style jsx global>{`
-        :root {
-          --some-color: teal;
+      <div className="inner">{children}</div>
+      <style jsx>{`
+        .inner {
+          margin: 0 auto;
+          padding: 2em;
+          max-width: var(--max-width);
         }
-        * {
-          font-family: Menlo, Monaco, 'Lucida Console', 'Liberation Mono',
-            'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New',
-            monospace, serif;
+      `}</style>
+      <style jsx global>{`
+        html {
+          font-size: 16px;
+          font-family: Verdana, Arial, sans-serif;
+        }
+        *,
+        *:before,
+        *:after {
+          box-sizing: inherit;
         }
         body {
-          background-color: ${theme.background};
+          font-size: 1em;
           margin: 0;
-          padding: 25px 50px;
+          padding: 0;
+        }
+        a {
+          text-decoration: none;
+          color: var(--primary);
         }
         p {
-          font-size: 14px;
-          line-height: 24px;
-        }
-        article {
-          margin: 0 auto;
-          max-width: 650px;
-        }
-        button {
-          align-items: center;
-          background-color: #22bad9;
-          border: 0;
-          color: white;
-          display: flex;
-          padding: 5px 7px;
-        }
-        button:active {
-          background-color: #1b9db7;
-          transition: background-color 0.3s;
-        }
-        button:focus {
-          outline: none;
+          font-size: 1em;
+          line-height: 1.6;
         }
       `}</style>
     </main>
