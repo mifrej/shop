@@ -1,5 +1,3 @@
-import { useTheme } from 'theming';
-import { Theme } from 'typings/types';
 import Header from '../header/header';
 import Meta from '../meta/meta';
 import '../theme/variables.css';
@@ -7,7 +5,6 @@ import '../theme/variables.css';
 const Page: React.FunctionComponent<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const theme: Theme | object | null = useTheme();
   return (
     <main>
       <Meta />

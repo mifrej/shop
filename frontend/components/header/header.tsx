@@ -1,15 +1,17 @@
 import Link from 'next/link';
+import Nav from '../nav/nav';
 import '../theme/variables.css';
 
 const Header = () => {
   return (
     <>
       <div className="bar">
-        <div className="logo">
+        <h1 className="logo">
           <Link href="/">
             <a>Components Shop</a>
           </Link>
-        </div>
+        </h1>
+        <Nav />
       </div>
       <div className="sub-bar">
         <p>Search</p>
@@ -38,6 +40,7 @@ const Header = () => {
           text-align: center;
           position: relative;
           z-index: 2;
+          transform: skew(-7deg);
           & a {
             padding: 0.5em 1em;
             text-transform: uppercase;

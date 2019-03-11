@@ -18,6 +18,6 @@ module.exports = {
   ],
   rules: {
     "prettier/prettier": true,
-    "unit-whitelist": ["em", "rem", "%"]
+    "unit-whitelist": ["em", "deg", "rem", "%"]
   }
 }
