@@ -7,5 +7,6 @@ module.exports = {
       stage: 0,
     },
     "postcss-spiffing": {},
+    "postcss-reporter": { clearReportedMessages: true }
   },
 }

@@ -48,7 +48,7 @@ const Header = () => {
             text-align: initial;
           }
         }
-    `}</style>
+      `}</style>
     </>
   );
 };

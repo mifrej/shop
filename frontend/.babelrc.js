@@ -7,7 +7,8 @@ module.exports = {
           {
             "styled-jsx": {
               plugins: [
-                "styled-jsx-plugin-postcss"
+                "styled-jsx-plugin-postcss",
+                "styled-jsx-plugin-stylelint"
               ]
             }
           }
