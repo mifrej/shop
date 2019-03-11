@@ -1,15 +1,11 @@
 module.exports = {
-  "plugins": {
+  plugins: {
     "postcss-easy-import": {},
     "postcss-preset-env": {
-      "browsers": ['last 2 versions', 'ie >= 11'],
-      "features": {
-        "nesting-rules": true,
-        "color-mod-function": {
-          unresolved: 'warn'
-        }
-      }
+      browsers: ['last 2 versions', 'ie >= 11'],
+      importFrom: "components/theme/postcss-imports.css",
+      stage: 0,
     },
-    "postcss-spiffing": {}
-  }
+    "postcss-spiffing": {},
+  },
 }

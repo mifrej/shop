@@ -16,6 +16,7 @@
     "react": "^16.8.3",
     "react-apollo": "^2.4.1",
     "react-dom": "^16.8.3",
+    "styled-jsx": "^3.2.1",
     "theming": "^3.1.0"
   },
   "prettier": {
@@ -23,6 +24,7 @@
     "trailingComma": "all"
   },
   "scripts": {
+    "dev:clear-cache": "rm -rf .node_modules/.cache .next",
     "dev": "next -p 7777",
     "build": "next build",
     "start": "next start",
@@ -51,6 +53,7 @@
     "prettier": "1.16.4",
     "react-addons-test-utils": "^15.6.2",
     "react-test-renderer": "^16.8.3",
+    "styled-jsx-plugin-postcss": "^2.0.0",
     "tslint": "^5.13.0",
     "tslint-config-airbnb": "^5.11.1",
     "tslint-config-prettier": "^1.18.0",

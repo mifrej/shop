@@ -2,7 +2,16 @@ module.exports = {
   env: {
     development: {
       presets: [
-        "next/babel",
+        [
+          "next/babel",
+          {
+            "styled-jsx": {
+              plugins: [
+                "styled-jsx-plugin-postcss"
+              ]
+            }
+          }
+        ],
         "@zeit/next-typescript/babel"
       ]
     },
