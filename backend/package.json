@@ -5,9 +5,9 @@
   "name": "shop-backend-js",
   "scripts": {
     "deploy": "prisma deploy",
-    "start": "npm-run-all --parallel playground start:dev",
+    "start": "npm-run-all --parallel playground dev",
     "playground": "graphql playground",
-    "start:dev": "ts-node-dev --no-notify --respawn --transpileOnly ./src",
+    "dev": "ts-node-dev --no-notify --respawn --transpileOnly ./src",
     "start:prod": "ts-node src/index.ts",
     "tslint": "tslint -c tslint.json '{prisma,src}/**/*.ts'",
     "ts:check": "tsc --noEmit"
