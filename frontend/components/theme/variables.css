@@ -1,3 +1,5 @@
+@import "normalize.css";
+
 :root {
   /* Basic colors */
   --black: #000;
@@ -11,7 +13,7 @@
   --alert: #9f1d22;
 
   /* Colors - gray palette */
-  --light-gray: #851d1d;
+  --light-gray: #f5f5f5;
   --medium-gray: #ebebeb;
   --dark-gray: #9a9a9a;
   --box-shadow-color1: rgba(9, 30, 66, 0.25);

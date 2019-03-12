@@ -43,6 +43,7 @@ const Header = () => {
           transform: skew(-7deg);
           & a {
             padding: 0.5em 1em;
+            display: inline-flex;
             text-transform: uppercase;
             text-decoration: none;
           }
