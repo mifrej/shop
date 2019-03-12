@@ -16,7 +16,7 @@ function create(initialState: WithApolloState<any> | {}) {
     connectToDevTools: process.browser,
     link: new HttpLink({
       credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
-      uri: 'https://api.graph.cool/simple/v1/cixmkt2ul01q00122mksg82pn', // Server URL (must be absolute)
+      uri: process.env.BACKEND_URL, // Server URL (must be absolute)
     }),
     ssrMode: !process.browser, // Disables forceFetch on the server (so queries are only run once)
   });
