@@ -2,24 +2,18 @@ import { makePrismaSchema, prismaObjectType } from 'nexus-prisma';
 import * as path from 'path';
 import datamodelInfo from './generated/nexus-prisma';
 import { prisma } from './generated/prisma-client';
+import { resolvers } from './resolvers';
 
-const Query = prismaObjectType({
-  name: 'Query',
-  definition(t) {
-    t.prismaFields(['user', 'users', 'item', 'items', 'cartItem', 'cartItems']);
-  },
-});
-
-const Mutation = prismaObjectType({
-  name: 'Mutation',
-  definition(t) {
-    t.prismaFields(['createItem', 'deleteItem', 'createUser', 'deleteUser']);
-  },
-});
+// const Mutation = prismaObjectType({
+//   name: 'Mutation',
+//   definition(t) {
+//     t.prismaFields(['createItem', 'deleteItem', 'createUser', 'deleteUser']);
+//   },
+// });
 
 const schema = makePrismaSchema({
   // Provide all the GraphQL types we've implemented
-  types: [Query, Mutation],
+  types: resolvers,
 
   // Configure the interface to Prisma
   prisma: {
