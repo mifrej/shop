@@ -1,10 +1,10 @@
 import * as dotenv from 'dotenv';
+dotenv.config();
+
 import { GraphQLServer } from 'graphql-yoga';
 // prisma is our db connector
 import { prisma } from './generated/prisma-client';
 import schema from './schema';
-
-dotenv.config();
 
 const server = new GraphQLServer({
   context: { prisma },
