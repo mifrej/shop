@@ -7,7 +7,7 @@
     "deploy": "prisma deploy",
     "start": "npm-run-all --parallel playground dev",
     "playground": "graphql playground",
-    "dev": "ts-node-dev --no-notify --respawn --transpileOnly ./src",
+    "dev": "ts-node-dev --inspect --no-notify --respawn --transpileOnly ./src",
     "start:prod": "ts-node src/index.ts",
     "tslint": "tslint -c tslint.json '{prisma,src}/**/*.ts'",
     "ts:check": "tsc --noEmit"
