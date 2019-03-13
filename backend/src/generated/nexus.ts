@@ -43,14 +43,6 @@ export interface NexusGenInputs {
   CartItemWhereUniqueInput: { // input type
     id?: string | null; // ID
   }
-  ItemCreateInput: { // input type
-    description: string; // String!
-    image?: string | null; // String
-    largeImage?: string | null; // String
-    price: number; // Int!
-    title: string; // String!
-    user: NexusGenInputs['UserCreateOneInput']; // UserCreateOneInput!
-  }
   ItemWhereInput: { // input type
     AND?: NexusGenInputs['ItemWhereInput'][] | null; // [ItemWhereInput!]
     description?: string | null; // String
@@ -133,23 +125,9 @@ export interface NexusGenInputs {
     title_not_in?: string[] | null; // [String!]
     title_not_starts_with?: string | null; // String
     title_starts_with?: string | null; // String
-    user?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
   }
   ItemWhereUniqueInput: { // input type
     id?: string | null; // ID
-  }
-  UserCreateInput: { // input type
-    email: string; // String!
-    name: string; // String!
-    password: string; // String!
-    permissions?: NexusGenInputs['UserCreatepermissionsInput'] | null; // UserCreatepermissionsInput
-  }
-  UserCreateOneInput: { // input type
-    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
-    create?: NexusGenInputs['UserCreateInput'] | null; // UserCreateInput
-  }
-  UserCreatepermissionsInput: { // input type
-    set?: NexusGenEnums['Permission'][] | null; // [Permission!]
   }
   UserWhereInput: { // input type
     AND?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
@@ -256,12 +234,8 @@ export interface NexusGenRootTypes {
 export interface NexusGenAllTypes extends NexusGenRootTypes {
   CartItemWhereInput: NexusGenInputs['CartItemWhereInput'];
   CartItemWhereUniqueInput: NexusGenInputs['CartItemWhereUniqueInput'];
-  ItemCreateInput: NexusGenInputs['ItemCreateInput'];
   ItemWhereInput: NexusGenInputs['ItemWhereInput'];
   ItemWhereUniqueInput: NexusGenInputs['ItemWhereUniqueInput'];
-  UserCreateInput: NexusGenInputs['UserCreateInput'];
-  UserCreateOneInput: NexusGenInputs['UserCreateOneInput'];
-  UserCreatepermissionsInput: NexusGenInputs['UserCreatepermissionsInput'];
   UserWhereInput: NexusGenInputs['UserWhereInput'];
   UserWhereUniqueInput: NexusGenInputs['UserWhereUniqueInput'];
   CartItemOrderByInput: NexusGenEnums['CartItemOrderByInput'];
@@ -284,13 +258,9 @@ export interface NexusGenFieldTypes {
     largeImage: string | null; // String
     price: number; // Int!
     title: string; // String!
-    user: NexusGenRootTypes['User']; // User!
   }
   Mutation: { // field return type
-    createItem: NexusGenRootTypes['Item']; // Item!
-    createUser: NexusGenRootTypes['User']; // User!
-    deleteItem: NexusGenRootTypes['Item'] | null; // Item
-    deleteUser: NexusGenRootTypes['User'] | null; // User
+    createItem: NexusGenRootTypes['Item'] | null; // Item
   }
   Query: { // field return type
     cartItem: NexusGenRootTypes['CartItem'] | null; // CartItem
@@ -312,16 +282,11 @@ export interface NexusGenFieldTypes {
 export interface NexusGenArgTypes {
   Mutation: {
     createItem: { // args
-      data: NexusGenInputs['ItemCreateInput']; // ItemCreateInput!
-    }
-    createUser: { // args
-      data: NexusGenInputs['UserCreateInput']; // UserCreateInput!
-    }
-    deleteItem: { // args
-      where: NexusGenInputs['ItemWhereUniqueInput']; // ItemWhereUniqueInput!
-    }
-    deleteUser: { // args
-      where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
+      description?: string | null; // String
+      image?: string | null; // String
+      largeImage?: string | null; // String
+      price?: number | null; // Int
+      title?: string | null; // String
     }
   }
   Query: {
@@ -371,7 +336,7 @@ export interface NexusGenInheritedFields {}
 
 export type NexusGenObjectNames = "CartItem" | "Item" | "Mutation" | "Query" | "User";
 
-export type NexusGenInputNames = "CartItemWhereInput" | "CartItemWhereUniqueInput" | "ItemCreateInput" | "ItemWhereInput" | "ItemWhereUniqueInput" | "UserCreateInput" | "UserCreateOneInput" | "UserCreatepermissionsInput" | "UserWhereInput" | "UserWhereUniqueInput";
+export type NexusGenInputNames = "CartItemWhereInput" | "CartItemWhereUniqueInput" | "ItemWhereInput" | "ItemWhereUniqueInput" | "UserWhereInput" | "UserWhereUniqueInput";
 
 export type NexusGenEnumNames = "CartItemOrderByInput" | "ItemOrderByInput" | "Permission" | "UserOrderByInput";
 
